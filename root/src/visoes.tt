@@ -1,0 +1,35 @@
+<div class="row">
+	<div class="span16">
+		<h3 class="visoes_title">Cinco visões de uma cidade possível</h3>
+	</div>
+	
+	<div class="span15 offset1">
+			<div class="menu-01 botao_menu">
+				<span>DEMOCRATICA</span><br/>
+				<span>PARTICIPATIVA</span><br/>
+				<span>DESCENTRALIZADA/</span><br/>
+			</div>
+			<div class="menu-02 botao_menu">
+				<span>DEMOCRATICA</span><br/>
+				<span>PARTICIPATIVA</span><br/>
+				<span>DESCENTRALIZADA/</span><br/>
+			</div>
+			<div class="menu-03 botao_menu">
+				<span>DEMOCRATICA</span><br/>
+				<span>PARTICIPATIVA</span><br/>
+				<span>DESCENTRALIZADA/</span><br/>
+			</div>
+			<div class="menu-04 botao_menu">
+				<span>DEMOCRATICA</span><br/>
+				<span>PARTICIPATIVA</span><br/>
+				<span>DESCENTRALIZADA/</span><br/>
+			</div>
+			<div class="menu-05 botao_menu">
+				<span>DEMOCRATICA</span><br/>
+				<span>PARTICIPATIVA</span><br/>
+				<span>DESCENTRALIZADA/</span><br/>
+			</div>
+		</div>
+
+	</div>
+</div>

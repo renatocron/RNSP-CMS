@@ -2,8 +2,32 @@
 <html>
 <head>
 <title>[% title or 'São Paulo 2022' %]</title>
+<meta name="author" content="Comunidade Perl Mongers">
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="[% c.uri_for('/static/css/bootstrap.1.4.0.min.css') %]">
+<link rel="stylesheet" href="[% c.uri_for('/static/css/custom.css') %]">
 </head>
 <body>
-[% content %]
+<div class="container">
+	<div class="content">
+		<div class="page-header">
+			<img src="[%c.uri_for('/static/images/topo.png')%]"  alt="São Paulo 2022" height="258" width="940" /> <!-- TODO redimencionar a imagem para 940px / remover search box da imagem ? vai exitir search? -->
+		</div>
+		[% PROCESS 'visoes.tt' %]
+		[% content | none %]
+	</div>
+</div>
+
+<div class="fill footer_fill">
+	<div class="container">
+		<footer>
+			<a href="[%c.uri_for('/')%]">O que é São Paulo 2022</a> | 
+			<a href="http://brasil.pm.org/">Desenvolvido por Perl Mongers</a>
+		</footer>
+	</div>
+</div>
+
 </body>
 </html>

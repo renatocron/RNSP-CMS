@@ -1,0 +1,24 @@
+.footer_fill {
+	background-color: #d0d1d3;
+	
+}
+.visoes_title {
+	text-align: center;
+	color: #888;
+	font-size: 2.0em;
+}
+
+.botao_menu {
+	border: 1px solid white;
+	width: 160px;
+	margin-right: 2px;
+	height: 80px;
+	background-color: green;
+	float: left;
+}
+
+footer {
+	margin-top: 0;
+	border: 0;
+	margin-bottom: 30px;
+}
