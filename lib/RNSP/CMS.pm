@@ -20,6 +20,16 @@ use Catalyst qw/
   -Debug
   ConfigLoader
   Static::Simple
+
+	Authentication
+	
+	Session
+	Session::Store::Cache
+	Session::State::Cookie
+	Session::PerUser
+
+	Cache
+
   /;
 
 extends 'Catalyst';
@@ -50,6 +60,34 @@ __PACKAGE__->config(
         ]
     }
 );
+
+
+__PACKAGE__->config->{'Plugin::Cache'}{backend} = {
+ 	class => 'Cache::FileCache',
+	default_expires_in => 60 * 60 * 12,
+	cache_root => 'cache/filecache'
+};
+
+__PACKAGE__->config(
+	"Plugin::Session" => {
+		expires => 60 * 60,
+	},
+);
+
+# Configure SimpleDB Authentication
+__PACKAGE__->config(
+	'Plugin::Authentication' => {
+		default => {
+			credential => {
+				class           => 'Password',
+				password_field => 'password',
+				password_type => 'clear'
+			}
+		},
+	},
+);
+__PACKAGE__->config( 'Plugin::ConfigLoader' => { file => 'user.json' } );
+
 
 # Start the application
 __PACKAGE__->setup();

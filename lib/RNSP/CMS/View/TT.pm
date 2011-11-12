@@ -5,10 +5,16 @@ use warnings;
 
 use base 'Catalyst::View::TT';
 
+use Template::AutoFilter;
+
+
 __PACKAGE__->config(
     TEMPLATE_EXTENSION => '.tt',
     WRAPPER            => 'wrapper.tt',
     render_die => 1,
+
+	CLASS => 'Template::AutoFilter',
+
 );
 
 =head1 NAME

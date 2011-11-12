@@ -52,6 +52,19 @@ sub error_500 : Private {
     $c->stash->{template} = 'error_500.tt';
 }
 
+
+sub test:Local {
+    my ( $self, $c ) = @_;
+
+	my $ok = $c->authenticate({ username => 'admin',
+					password => 'admin' })  ? 'logou' : 'nao logou';
+
+	print "\n\n$ok\n\n";
+    $c->stash->{template} = 'root.tt';
+
+
+}
+
 =head2 end
 
 Attempt to render a view, if needed.

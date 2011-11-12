@@ -13,11 +13,23 @@ requires 'Catalyst::Runtime' => '5.90002';
 requires 'Catalyst::Plugin::ConfigLoader';
 requires 'Catalyst::Plugin::Static::Simple';
 requires 'Catalyst::Action::RenderView';
+	
 requires 'Moose';
 requires 'namespace::autoclean';
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
 test_requires 'Test::More' => '0.88';
+
+requires 'Catalyst::Plugin::Authorization';
+
+requires 'Catalyst::Plugin::Cache';
+requires 'Catalyst::Plugin::Session';
+requires 'Catalyst::Plugin::Session::State::Cookie';
+requires 'Catalyst::Plugin::Session::Store::Cache';
+requires 'Catalyst::Plugin::Session::PerUser';
+
+requires 'Catalyst::Authentication::Credential::Password';
+
 catalyst;
 
 install_script glob('script/*.pl');

@@ -1,0 +1,18 @@
+{
+    "Plugin::Authentication": {
+        "default": {
+            "store": {
+                "class": "Minimal",
+                "users": {
+                    "admin": {
+                        "password": "admin",
+                        "editor": "yes",
+                        "roles": [
+                            "admin"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

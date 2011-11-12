@@ -1,6 +1,9 @@
-
+<!DOCTYPE html>
 <html>
-
+<head>
+<title>[% title or 'São Paulo 2022' %]</title>
+</head>
+<body>
 [% content %]
-
+</body>
 </html>
