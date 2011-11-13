@@ -35,3 +35,18 @@ footer {
 	border: 0;
 	margin-bottom: 30px;
 }
+
+div.documento {
+	padding: 30px;
+	
+}
+div.documento h1 {
+	text-align: center;
+}
+div.documento p {
+	text-align: justify;
+}
+div.documento span {
+	float: right;
+	font-size: 0.6em;
+}

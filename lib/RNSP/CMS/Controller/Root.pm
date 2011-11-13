@@ -32,19 +32,27 @@ sub base : Chained('/') PathPart('') CaptureArgs(0) {
 
 sub root : Chained('base') PathPart('') Args(0) {
     my ( $self, $c ) = @_;
+
+	$c->forward('RNSP::CMS::Controller::Documento', 'documento', [1]); # carregando o documento 1 no stash // doc 1 = home
+
 }
 
 
 sub show_visao : Chained('base') PathPart('') Args(1) {
     my ( $self, $c, $visao) = @_;
+	$c->detach('RNSP::CMS::Controller::Visao', 'visao', [$visao]);
 }
 
 sub show_visao_diretriz: Chained('base') PathPart('') Args(2) {
     my ( $self, $c, $visao, $diretriz ) = @_;
+	$c->detach('RNSP::CMS::Controller::Visao', 'visao_diretriz', [$visao, $diretriz]);
+
 }
 
 sub show_visao_diretriz_proposta: Chained('base') PathPart('') Args(3) {
     my ( $self, $c,$visao, $diretriz,$proposta ) = @_;
+	$c->detach('RNSP::CMS::Controller::Visao', 'visao_diretriz_proposta', [$visao, $diretriz, $proposta]);
+
 }
 
 =head2 default

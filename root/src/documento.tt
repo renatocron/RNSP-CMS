@@ -1,0 +1,6 @@
+<div class="documento">
+	<h1>[% documento.titulo %]</h1>
+	<span>[%documento.created_at%]</span>
+	<p>[%documento.texto%]</p>
+</div>
+

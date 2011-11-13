@@ -1,5 +1,5 @@
 <div class="row">
 	<div class="span16">
-		Texto O Que é o SP2022 centralizado
+		[% PROCESS documento.tt %]
 	</div>
 </div>
