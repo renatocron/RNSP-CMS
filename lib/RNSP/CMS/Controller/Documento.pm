@@ -25,7 +25,7 @@ sub documento: Args(1) :Private {
     my ($self, $c, $id_documento) = @_;
 
 	my $documento = $c->cache->get('documento-' . $id_documento);
-	unless (defined $id_documento) {
+	unless (defined $documento) {
 		my $documento_rs = $c->model('DB')->resultset('Documento')->find($id_documento);
 
 		$documento = {
@@ -33,7 +33,7 @@ sub documento: Args(1) :Private {
 			texto  => $documento_rs->texto,
 			created_at => $documento_rs->created_at
 		};
-		$c->cache->set("documento-$id_documento", $documento);
+		$c->cache->set("documento-$id_documento", $documento, '14 min');
 	}
 
     $c->stash( documento => $documento );

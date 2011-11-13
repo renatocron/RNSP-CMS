@@ -65,9 +65,15 @@ Conectada'
 
 create table diretriz (
 	id INTEGER primary key,
+	id_visao integer not null,
 	id_documento integer not null,
-	FOREIGN KEY (id_documento) REFERENCES documento(id)
+	FOREIGN KEY (id_documento) REFERENCES documento(id),
+	FOREIGN KEY (id_visao) REFERENCES visao(id)
 );
+
+insert into documento(titulo, texto) values ('primeira diretriz', 'primeira diretriz !! estou começando a achar que vou errar o id');
+insert into diretriz (id_visao, id_documento) values (1, 7);
+
 
 create table indicador (
 	id INTEGER primary key,

@@ -1,0 +1,12 @@
+<div class="row">
+	<div class="span2">
+		[%PROCESS diretriz.tt%]
+	</div>
+	<div class="span9">
+		[%PROCESS documento.tt%]
+	</div>
+	<div class="span3">
+		[%PROCESS proposta.tt%]
+	</div>
+
+</div>

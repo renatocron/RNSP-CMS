@@ -1,0 +1,7 @@
+<h3>Diretrizes</h3>
+
+[%FOREACH d = diretrizes %]
+<div class="diretrizes">
+	<div class="botao_menu"><a href="[%c.uri_for(visao.texto_uri, d.id)%]">[%d.titulo%]</a></div>
+</div>
+[%END%]

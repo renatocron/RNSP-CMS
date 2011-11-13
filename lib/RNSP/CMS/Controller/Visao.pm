@@ -26,12 +26,12 @@ sub visao :Path :Args(1) :Private {
 
 	$self->stash_visao($c, $texto_uri);
 
-	unless (defined $c->stash->{visao}){
-		$c->detach('RNSP::CMS::Controller::Root', 'error_404');
-	}
+	$c->detach('RNSP::CMS::Controller::Root', 'error_404') unless (defined $c->stash->{visao});
 
-    $c->response->body("$texto_uri");
-		
+	# se tem a visao, carregue o documento!
+
+	$c->forward('RNSP::CMS::Controller::Documento', 'documento', [ $c->stash->{visao}{id_documento} ]);
+
 }
 
 
@@ -49,6 +49,34 @@ sub stash_visao : Private {
 		$c->cache->set('visao-'.$texto_uri, $visao);
 	}
 	$c->stash( visao => $visao );
+
+	# se existe visao, coloca as diretrizes tambem
+	$self->stash_diretrizes($c, $visao->{id}) if (defined $visao);
+
+}
+
+sub stash_diretrizes : Private {
+    my ( $self, $c, $id_visao ) = @_;
+
+	my $diretrizes = $c->cache->get('diretrizes-'.$id_visao);
+	#unless ($diretrizes){
+if(1){
+		my @diretrizes_rows = $c->model('DB')->resultset('Diretriz')->search({
+			id_visao => $id_visao
+		})->all;
+		$diretrizes = [];
+		foreach my $d (@diretrizes_rows){
+			push @$diretrizes, {
+				id_documento => $d->id_documento,
+				id => $d->id,
+				titulo => $d->id_documento->titulo,
+				texto => $d->id_documento->texto
+			}
+		}
+		$c->cache->set('diretrizes-'.$id_visao, $id_visao);
+	}
+
+	$c->stash( diretrizes => $diretrizes );
 }
 
 =head1 AUTHOR

@@ -29,21 +29,23 @@
 .menu-3 {background-color: #be526c;}
 .menu-4 {background-color: #7A5AA5;}
 .menu-5 {background-color: #E98537;}
-a, a:hover, a:visited {
+.botao_menu a {width: 100%; display: block;}
+.botao_menu a, .botao_menu a:hover, .botao_menu a:visited {
 	text-decoration: none;
 	color: #DDD;
 }
+.diretrizes .botao_menu {
+	width: 100%;
+	color: #000;
+}
+
 
 footer {
 	margin-top: 0;
 	border: 0;
 	margin-bottom: 30px;
 }
-
-div.documento {
-	padding: 30px;
-	
-}
+ 
 div.documento h1 {
 	text-align: center;
 }
@@ -52,5 +54,6 @@ div.documento p {
 }
 div.documento span {
 	float: right;
-	font-size: 0.6em;
+	font-size: 0.8em;
+	padding-left: 30px;
 }
