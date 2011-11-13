@@ -1,12 +1,12 @@
 use utf8;
-package RNSP::CMS::Schema::Result::Tema;
+package RNSP::CMS::Schema::Result::Indicador;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-RNSP::CMS::Schema::Result::Tema
+RNSP::CMS::Schema::Result::Indicador
 
 =cut
 
@@ -32,11 +32,11 @@ extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp");
 
-=head1 TABLE: C<tema>
+=head1 TABLE: C<indicador>
 
 =cut
 
-__PACKAGE__->table("tema");
+__PACKAGE__->table("indicador");
 
 =head1 ACCESSORS
 
@@ -46,18 +46,26 @@ __PACKAGE__->table("tema");
   is_auto_increment: 1
   is_nullable: 0
 
-=head2 nome
+=head2 id_diretriz
+
+  data_type: 'int'
+  is_foreign_key: 1
+  is_nullable: 1
+
+=head2 descricao
 
   data_type: 'varchar'
-  is_nullable: 0
+  is_nullable: 1
 
 =cut
 
 __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "nome",
-  { data_type => "varchar", is_nullable => 0 },
+  "id_diretriz",
+  { data_type => "int", is_foreign_key => 1, is_nullable => 1 },
+  "descricao",
+  { data_type => "varchar", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -74,24 +82,29 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 propostas
+=head2 id_diretriz
 
-Type: has_many
+Type: belongs_to
 
-Related object: L<RNSP::CMS::Schema::Result::Proposta>
+Related object: L<RNSP::CMS::Schema::Result::Diretriz>
 
 =cut
 
-__PACKAGE__->has_many(
-  "propostas",
-  "RNSP::CMS::Schema::Result::Proposta",
-  { "foreign.id_tema" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+__PACKAGE__->belongs_to(
+  "id_diretriz",
+  "RNSP::CMS::Schema::Result::Diretriz",
+  { id => "id_diretriz" },
+  {
+    is_deferrable => 1,
+    join_type     => "LEFT",
+    on_delete     => "CASCADE",
+    on_update     => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 13:59:12
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YiyxCYhN1BqjrapLPTopDg
+# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 13:24:16
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Jpebkup21SEhJ4358+YIJw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

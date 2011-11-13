@@ -1,12 +1,12 @@
 use utf8;
-package RNSP::CMS::Schema::Result::Diretriz;
+package RNSP::CMS::Schema::Result::Proposta;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-RNSP::CMS::Schema::Result::Diretriz
+RNSP::CMS::Schema::Result::Proposta
 
 =cut
 
@@ -32,11 +32,11 @@ extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp");
 
-=head1 TABLE: C<diretriz>
+=head1 TABLE: C<proposta>
 
 =cut
 
-__PACKAGE__->table("diretriz");
+__PACKAGE__->table("proposta");
 
 =head1 ACCESSORS
 
@@ -46,15 +46,21 @@ __PACKAGE__->table("diretriz");
   is_auto_increment: 1
   is_nullable: 0
 
-=head2 id_visao
+=head2 id_tema
 
-  data_type: 'integer'
+  data_type: 'int'
+  is_foreign_key: 1
+  is_nullable: 0
+
+=head2 id_regiao
+
+  data_type: 'int'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 id_documento
 
-  data_type: 'integer'
+  data_type: 'int'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -63,10 +69,12 @@ __PACKAGE__->table("diretriz");
 __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "id_visao",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "id_tema",
+  { data_type => "int", is_foreign_key => 1, is_nullable => 0 },
+  "id_regiao",
+  { data_type => "int", is_foreign_key => 1, is_nullable => 0 },
   "id_documento",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  { data_type => "int", is_foreign_key => 1, is_nullable => 0 },
 );
 
 =head1 PRIMARY KEY
@@ -98,39 +106,39 @@ __PACKAGE__->belongs_to(
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
-=head2 id_visao
+=head2 id_regiao
 
 Type: belongs_to
 
-Related object: L<RNSP::CMS::Schema::Result::Visao>
+Related object: L<RNSP::CMS::Schema::Result::Regiao>
 
 =cut
 
 __PACKAGE__->belongs_to(
-  "id_visao",
-  "RNSP::CMS::Schema::Result::Visao",
-  { id => "id_visao" },
+  "id_regiao",
+  "RNSP::CMS::Schema::Result::Regiao",
+  { id => "id_regiao" },
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
-=head2 indicadors
+=head2 id_tema
 
-Type: has_many
+Type: belongs_to
 
-Related object: L<RNSP::CMS::Schema::Result::Indicador>
+Related object: L<RNSP::CMS::Schema::Result::Tema>
 
 =cut
 
-__PACKAGE__->has_many(
-  "indicadors",
-  "RNSP::CMS::Schema::Result::Indicador",
-  { "foreign.id_diretriz" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+__PACKAGE__->belongs_to(
+  "id_tema",
+  "RNSP::CMS::Schema::Result::Tema",
+  { id => "id_tema" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 13:24:16
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0jP2FRKxfrJM2cOwbGVuVw
+# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 13:59:12
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MiYNzJ0yltqsfs0E/xxgGA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

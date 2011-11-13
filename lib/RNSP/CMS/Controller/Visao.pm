@@ -74,20 +74,29 @@ sub stash_diretrizes : Private {
     my ( $self, $c, $id_visao, $id_diretriz ) = @_;
 
 	my $diretrizes = $c->cache->get('diretrizes-'.$id_visao);
-	unless ($diretrizes){
+	#unless ($diretrizes){
+if(1){
 		my @diretrizes_rows = $c->model('DB')->resultset('Diretriz')->search({
 			id_visao => $id_visao
 		})->all;
 		$diretrizes = [];
 		foreach my $d (@diretrizes_rows){
+			
+			my @indicadors = $d->indicadors->search(undef, {
+				result_class => 'DBIx::Class::ResultClass::HashRefInflator'
+			});
+
+			my $indicadores = \@indicadors;
 			push @$diretrizes, {
 				id_documento => $d->id_documento->id,
 				id => $d->id,
 				titulo => $d->id_documento->titulo,
-				texto => $d->id_documento->texto
+				texto => $d->id_documento->texto,
+				indicadores => $indicadores
 			}
 		}
 		$c->cache->set('diretrizes-'.$id_visao, $diretrizes, '14min');
+
 	}
 
 	$c->stash( diretrizes => $diretrizes );

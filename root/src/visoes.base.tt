@@ -3,7 +3,7 @@
 		<h3 class="visoes_title">Cinco visões de uma cidade possível</h3>
 	</div>
 
-	<div class="span15 offset1">
+	<div class="menu_visoes span15 offset1">
 		[%FOREACH v = visoes %]
 			<div class="menu-[%v.id%] botao_menu">
 				<a href="/sp2022/[% v.texto_uri %]">

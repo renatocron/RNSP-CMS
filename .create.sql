@@ -80,22 +80,43 @@ insert into diretriz (id_visao, id_documento) values (1, 8);
 create table indicador (
 	id INTEGER primary key,
 	id_diretriz int,
-	descricao varchar
+	descricao varchar,
+	FOREIGN KEY (id_diretriz) REFERENCES diretriz(id)
 );
+
+insert into indicador (id_diretriz, descricao) values (1, 'abc');
+insert into indicador (id_diretriz, descricao) values (1, 'eee xxx');
+insert into indicador (id_diretriz, descricao) values (1, '98654');
+
+insert into indicador (id_diretriz, descricao) values (2, '888888');
+insert into indicador (id_diretriz, descricao) values (2, 'HHHHH');
+
+
 create table tema (
 	id INTEGER primary key,
 	nome varchar not null
 );
+
 create table regiao (
 	id INTEGER primary key,
 	nome varchar not null
-)
+);
 
 
 create table proposta (
 	id INTEGER primary key,
 	id_tema int not null,
 	id_regiao int not null,
-	id_documento int not null
+	id_diretriz int not null,
+	id_documento int not null,
+	FOREIGN KEY (id_tema) REFERENCES tema(id),
+	FOREIGN KEY (id_regiao) REFERENCES regiao(id),
+	FOREIGN KEY (id_documento) REFERENCES documento(id),
+	FOREIGN KEY (id_diretriz) REFERENCES diretriz(id)
 );
 
+insert into tema (nome) values ('tema 1');
+insert into regiao (nome) values ('regiao 1');
+
+insert into documento(titulo, texto) values ('doc primeira proposta', 'rand() <script>alert("i cant")</script>');
+insert into proposta(id_tema, id_regiao, id_diretriz, id_documento) values(1,1,1,9);

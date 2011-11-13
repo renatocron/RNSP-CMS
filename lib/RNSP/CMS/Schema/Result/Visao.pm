@@ -103,6 +103,21 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
+=head2 diretrizzes
+
+Type: has_many
+
+Related object: L<RNSP::CMS::Schema::Result::Diretriz>
+
+=cut
+
+__PACKAGE__->has_many(
+  "diretrizzes",
+  "RNSP::CMS::Schema::Result::Diretriz",
+  { "foreign.id_visao" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 id_documento
 
 Type: belongs_to
@@ -119,8 +134,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-12 22:53:43
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8ZfzUFYZQeNoZtefOoAQeA
+# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 13:24:16
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zNiDxBv+DBJMiH2MOLkiqw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

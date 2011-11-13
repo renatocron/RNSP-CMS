@@ -1,12 +1,12 @@
 use utf8;
-package RNSP::CMS::Schema::Result::Documento;
+package RNSP::CMS::Schema::Result::Regiao;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-RNSP::CMS::Schema::Result::Documento
+RNSP::CMS::Schema::Result::Regiao
 
 =cut
 
@@ -32,11 +32,11 @@ extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp");
 
-=head1 TABLE: C<documento>
+=head1 TABLE: C<regiao>
 
 =cut
 
-__PACKAGE__->table("documento");
+__PACKAGE__->table("regiao");
 
 =head1 ACCESSORS
 
@@ -46,38 +46,18 @@ __PACKAGE__->table("documento");
   is_auto_increment: 1
   is_nullable: 0
 
-=head2 titulo
+=head2 nome
 
   data_type: 'varchar'
   is_nullable: 0
-  size: 100
-
-=head2 texto
-
-  data_type: 'varchar'
-  is_nullable: 0
-
-=head2 created_at
-
-  data_type: 'timestamp date'
-  default_value: datetime('now','localtime')
-  is_nullable: 1
 
 =cut
 
 __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "titulo",
-  { data_type => "varchar", is_nullable => 0, size => 100 },
-  "texto",
+  "nome",
   { data_type => "varchar", is_nullable => 0 },
-  "created_at",
-  {
-    data_type     => "timestamp date",
-    default_value => \"datetime('now','localtime')",
-    is_nullable   => 1,
-  },
 );
 
 =head1 PRIMARY KEY
@@ -94,21 +74,6 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 diretrizzes
-
-Type: has_many
-
-Related object: L<RNSP::CMS::Schema::Result::Diretriz>
-
-=cut
-
-__PACKAGE__->has_many(
-  "diretrizzes",
-  "RNSP::CMS::Schema::Result::Diretriz",
-  { "foreign.id_documento" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
 =head2 propostas
 
 Type: has_many
@@ -120,28 +85,13 @@ Related object: L<RNSP::CMS::Schema::Result::Proposta>
 __PACKAGE__->has_many(
   "propostas",
   "RNSP::CMS::Schema::Result::Proposta",
-  { "foreign.id_documento" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
-=head2 visaos
-
-Type: has_many
-
-Related object: L<RNSP::CMS::Schema::Result::Visao>
-
-=cut
-
-__PACKAGE__->has_many(
-  "visaos",
-  "RNSP::CMS::Schema::Result::Visao",
-  { "foreign.id_documento" => "self.id" },
+  { "foreign.id_regiao" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
 # Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 13:59:12
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:INY7lFk5MDRqFGK6c8M1+w
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8GPb3YQsTBy2c5jS78h4Kw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

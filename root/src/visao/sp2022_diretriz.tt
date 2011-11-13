@@ -4,6 +4,17 @@
 	</div>
 	<div class="span10">
 		[%PROCESS documento.tt%]
+
+		[%IF diretriz.indicadores %]
+			<hr/>
+			<h3 class="indicadores">Indicadores</h3>
+
+			<ul>
+			[%FOREACH i = diretriz.indicadores %]
+				<li>[%i.descricao%]</li>
+			[%END%]
+			</ul>
+		[%END%]
 	</div>
 	<div class="span3">
 		[%PROCESS proposta.tt%]
