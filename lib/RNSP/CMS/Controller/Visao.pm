@@ -28,9 +28,26 @@ sub visao :Path :Args(1) :Private {
 
 	$c->detach('RNSP::CMS::Controller::Root', 'error_404') unless (defined $c->stash->{visao});
 
-	# se tem a visao, carregue o documento!
+	# se existe visao, coloca as diretrizes tambem
+	$self->stash_diretrizes($c, $c->stash->{visao}->{id});
 
+	# se tem a visao, carregue o documento!
 	$c->forward('RNSP::CMS::Controller::Documento', 'documento', [ $c->stash->{visao}{id_documento} ]);
+
+}
+
+sub visao_diretriz :Path :Args(2) :Private {
+    my ( $self, $c, $texto_uri, $id_diretriz ) = @_;
+
+	$self->stash_visao($c, $texto_uri);
+
+	$c->detach('RNSP::CMS::Controller::Root', 'error_404') unless (defined $c->stash->{visao});
+
+	$c->detach('RNSP::CMS::Controller::Root', 'error_404') unless
+		$self->stash_diretrizes($c, $c->stash->{visao}->{id}, $id_diretriz);
+use Data::Dumper;
+print("\n\n".Dumper $c->stash->{diretriz}{id_documento}."\n\n");
+	$c->forward('RNSP::CMS::Controller::Documento', 'documento', [ $c->stash->{diretriz}{id_documento} ]);
 
 }
 
@@ -49,35 +66,43 @@ sub stash_visao : Private {
 		$c->cache->set('visao-'.$texto_uri, $visao);
 	}
 	$c->stash( visao => $visao );
-
-	# se existe visao, coloca as diretrizes tambem
-	$self->stash_diretrizes($c, $visao->{id}) if (defined $visao);
-
 }
 
 sub stash_diretrizes : Private {
-    my ( $self, $c, $id_visao ) = @_;
+    my ( $self, $c, $id_visao, $id_diretriz ) = @_;
 
 	my $diretrizes = $c->cache->get('diretrizes-'.$id_visao);
-	#unless ($diretrizes){
-if(1){
+	unless ($diretrizes){
 		my @diretrizes_rows = $c->model('DB')->resultset('Diretriz')->search({
 			id_visao => $id_visao
 		})->all;
 		$diretrizes = [];
 		foreach my $d (@diretrizes_rows){
 			push @$diretrizes, {
-				id_documento => $d->id_documento,
+				id_documento => $d->id_documento->id,
 				id => $d->id,
 				titulo => $d->id_documento->titulo,
 				texto => $d->id_documento->texto
 			}
 		}
-		$c->cache->set('diretrizes-'.$id_visao, $id_visao);
+		$c->cache->set('diretrizes-'.$id_visao, $diretrizes);
 	}
 
 	$c->stash( diretrizes => $diretrizes );
+
+	if (defined $id_diretriz) {
+		foreach (@$diretrizes){
+			if ($_->{id} == $id_diretriz){
+				$c->stash( diretriz => $_ );
+				return 1;
+			}
+		}
+		return 0;
+	}	
+
 }
+
+
 
 =head1 AUTHOR
 
