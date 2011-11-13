@@ -84,15 +84,28 @@ if(1){
 			
 			my @indicadors = $d->indicadors->search(undef, {
 				result_class => 'DBIx::Class::ResultClass::HashRefInflator'
-			});
+			})->all;
+
+			my @propostas_rows = $d->propostas->all;
+			my $propostas      = [];
+
+			foreach my $p (@propostas_rows){
+				push @$propostas, {
+					id             => $p->id,
+					titulo         => $p->id_documento->titulo,
+					texto          => $p->id_documento->texto,
+					id_documento   => $p->id_documento->id,
+				};
+			}
 
 			my $indicadores = \@indicadors;
 			push @$diretrizes, {
-				id_documento => $d->id_documento->id,
-				id => $d->id,
-				titulo => $d->id_documento->titulo,
-				texto => $d->id_documento->texto,
-				indicadores => $indicadores
+				id_documento  => $d->id_documento->id,
+				id            => $d->id,
+				titulo        => $d->id_documento->titulo,
+				texto         => $d->id_documento->texto,
+				indicadores   => $indicadores,
+				propostas     => $propostas,
 			}
 		}
 		$c->cache->set('diretrizes-'.$id_visao, $diretrizes, '14min');

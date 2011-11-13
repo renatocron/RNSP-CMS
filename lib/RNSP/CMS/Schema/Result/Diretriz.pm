@@ -128,9 +128,24 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 propostas
 
-# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 13:24:16
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0jP2FRKxfrJM2cOwbGVuVw
+Type: has_many
+
+Related object: L<RNSP::CMS::Schema::Result::Proposta>
+
+=cut
+
+__PACKAGE__->has_many(
+  "propostas",
+  "RNSP::CMS::Schema::Result::Proposta",
+  { "foreign.id_diretriz" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 14:23:49
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:x8uFMw5fS9I72w6LP8vsRw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

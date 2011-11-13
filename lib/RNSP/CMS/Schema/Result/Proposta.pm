@@ -58,6 +58,12 @@ __PACKAGE__->table("proposta");
   is_foreign_key: 1
   is_nullable: 0
 
+=head2 id_diretriz
+
+  data_type: 'int'
+  is_foreign_key: 1
+  is_nullable: 0
+
 =head2 id_documento
 
   data_type: 'int'
@@ -72,6 +78,8 @@ __PACKAGE__->add_columns(
   "id_tema",
   { data_type => "int", is_foreign_key => 1, is_nullable => 0 },
   "id_regiao",
+  { data_type => "int", is_foreign_key => 1, is_nullable => 0 },
+  "id_diretriz",
   { data_type => "int", is_foreign_key => 1, is_nullable => 0 },
   "id_documento",
   { data_type => "int", is_foreign_key => 1, is_nullable => 0 },
@@ -90,6 +98,21 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
+
+=head2 id_diretriz
+
+Type: belongs_to
+
+Related object: L<RNSP::CMS::Schema::Result::Diretriz>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "id_diretriz",
+  "RNSP::CMS::Schema::Result::Diretriz",
+  { id => "id_diretriz" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+);
 
 =head2 id_documento
 
@@ -137,8 +160,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 13:59:12
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MiYNzJ0yltqsfs0E/xxgGA
+# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 14:23:49
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1p+pNRjUV0DNM1DzC+wA9w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
