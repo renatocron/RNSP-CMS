@@ -87,7 +87,7 @@ sub stash_diretrizes : Private {
 				texto => $d->id_documento->texto
 			}
 		}
-		$c->cache->set('diretrizes-'.$id_visao, $diretrizes);
+		$c->cache->set('diretrizes-'.$id_visao, $diretrizes, '14min');
 	}
 
 	$c->stash( diretrizes => $diretrizes );

@@ -72,7 +72,9 @@ create table diretriz (
 );
 
 insert into documento(titulo, texto) values ('primeira diretriz', 'primeira diretriz !! estou começando a achar que vou errar o id');
+insert into documento(titulo, texto) values ('segunda diretriz', 'segunda diretriz Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.');
 insert into diretriz (id_visao, id_documento) values (1, 7);
+insert into diretriz (id_visao, id_documento) values (1, 8);
 
 
 create table indicador (
