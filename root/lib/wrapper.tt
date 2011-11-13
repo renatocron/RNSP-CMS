@@ -8,8 +8,26 @@
 <![endif]-->
 <link rel="stylesheet" href="[% c.uri_for('/static/css/bootstrap.1.4.0.min.css') %]">
 <link rel="stylesheet" href="[% c.uri_for('/static/css/custom.css') %]">
+[%IF admin%]
+<link rel="stylesheet" href="[% c.uri_for('/static/css/admin.css') %]">
+[%END%]
 </head>
 <body>
+[%IF admin%]
+<div class="topbar">
+	<div class="fill">
+	<div class="container">
+		<a class="brand" href="#">RNSP</a>
+		<ul class="nav">
+			<li class="active"><a href="#">Login</a></li>
+			[% IF c.user_exists%]
+			<li><a href="#about">About</a></li>
+			[% END %]
+		</ul>
+	</div>
+	</div>
+</div>
+[%ELSE%]
 <div class="container">
 	<div class="content">
 		<div class="page-header">
@@ -19,7 +37,7 @@
 		[% content | none %]
 	</div>
 </div>
-
+[%END%]
 <div class="fill footer_fill">
 	<div class="container">
 		<footer>
@@ -30,4 +48,4 @@
 </div>
 
 </body>
-</html>
+</html> 

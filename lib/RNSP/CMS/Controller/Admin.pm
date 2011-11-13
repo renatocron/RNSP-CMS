@@ -21,7 +21,10 @@ Catalyst Controller.
 
 =cut
 
-sub base : Chained('/base') PathPart('admin') CaptureArgs(0) {}
+sub base : Chained('/base') PathPart('admin') CaptureArgs(0) {
+	my ($self, $c) = @_;
+    $c->stash( admin => 1 );
+}
 
 sub login : Chained('base') Args(0) {}
 
