@@ -34,6 +34,19 @@ sub root : Chained('base') PathPart('') Args(0) {
     my ( $self, $c ) = @_;
 }
 
+
+sub show_visao : Chained('base') PathPart('') Args(1) {
+    my ( $self, $c, $visao) = @_;
+}
+
+sub show_visao_diretriz: Chained('base') PathPart('') Args(2) {
+    my ( $self, $c, $visao, $diretriz ) = @_;
+}
+
+sub show_visao_diretriz_proposta: Chained('base') PathPart('') Args(3) {
+    my ( $self, $c,$visao, $diretriz,$proposta ) = @_;
+}
+
 =head2 default
 
 Standard 404 error page
