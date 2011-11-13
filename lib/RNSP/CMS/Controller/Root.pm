@@ -38,7 +38,8 @@ sub root : Chained('base') PathPart('') Args(0) {
 }
 
 
-sub show_visao : Chained('base') PathPart('') Args(1) {
+# pra não ter que mudar toda a regra do 404, mudei esse cara pra regexp
+sub show_visao : Chained('base') Regex('^[a-zA-Z-,\.0-9]+$') {
     my ( $self, $c, $visao) = @_;
 	$c->detach('RNSP::CMS::Controller::Visao', 'visao', [$visao]);
 }
