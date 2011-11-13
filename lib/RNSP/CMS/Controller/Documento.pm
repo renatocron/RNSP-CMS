@@ -21,7 +21,7 @@ Catalyst Controller.
 
 =cut
 
-sub documento: Args(1) :Private {
+sub documento :Private {
     my ($self, $c, $id_documento) = @_;
 
 	my $documento = $c->cache->get('documento-' . $id_documento);

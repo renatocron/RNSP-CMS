@@ -6,7 +6,7 @@
 	<div class="span15 offset1">
 		[%FOREACH v = visoes %]
 			<div class="menu-[%v.id%] botao_menu">
-				<a href="/[% v.texto_uri %]">
+				<a href="/sp2022/[% v.texto_uri %]">
 				[%FOREACH i = v.itens %]
 					<span>[%i%]</span><br/>
 				[%END%]

@@ -37,54 +37,23 @@ sub root : Chained('base') PathPart('') Args(0) {
 
 }
 
-
-# pra não ter que mudar toda a regra do 404, mudei esse cara pra regexp
-sub show_visao : Chained('base') Regex('^([a-zA-Z-,\.0-9]+)$') {
-    my ( $self, $c) = @_;
-	$c->detach('RNSP::CMS::Controller::Visao', 'visao', $c->req->captures);
-}
-
-sub show_visao_diretriz : Chained('base') Regex('^([a-zA-Z-,\.0-9]+)\/(\d+)$') {
-    my ( $self, $c ) = @_;
-	$c->detach('RNSP::CMS::Controller::Visao', 'visao_diretriz', $c->req->captures);
-
-}
-
-sub show_visao_diretriz_proposta: Chained('base') Regex('^([a-zA-Z-,\.0-9]+)\/(\d+)\/(\d+)$') {
-    my ( $self, $c,$visao, $diretriz,$proposta ) = @_;
-	$c->detach('RNSP::CMS::Controller::Visao', 'visao_diretriz_proposta', $c->req->captures);
-
-}
-
 =head2 default
 
 Standard 404 error page
 
 =cut
-
+=pod
 sub error_404 : Chained('base') PathPart('') Args {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'error_404.tt';
     $c->response->status(404);
 }
+=cut
 
 sub error_500 : Private {
     my ( $self, $c ) = @_;
     $c->response->status(500);
     $c->stash->{template} = 'error_500.tt';
-}
-
-
-sub test:Local {
-    my ( $self, $c ) = @_;
-
-	my $ok = $c->authenticate({ username => 'admin',
-					password => 'admin' })  ? 'logou' : 'nao logou';
-
-	print "\n\n$ok\n\n";
-    $c->stash->{template} = 'root.tt';
-
-
 }
 
 =head2 end

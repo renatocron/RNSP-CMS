@@ -1,6 +1,6 @@
 <h3>Diretrizes</h3>
 <div class="diretrizes">
 [%FOREACH d = diretrizes %]
-	<div class="botao_menu visao-[%visao.id%] [%IF d.id == diretriz.id %]active[%END%]"><a href="[%c.uri_for(visao.texto_uri, d.id)%]">[%d.titulo%]</a></div>
+	<div class="botao_menu visao-[%visao.id%] [%IF d.id == diretriz.id %]active[%END%]"><a href="[%c.uri_for('/sp2022',visao.texto_uri, d.id)%]">[%d.titulo%]</a></div>
 [%END%]
 </div>

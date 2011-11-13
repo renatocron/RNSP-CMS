@@ -21,7 +21,7 @@ Catalyst Controller.
 
 =cut
 
-sub visao :Path :Args(1) :Private {
+sub sp2022 :Path('/sp2022') :Args(1) {
     my ( $self, $c, $texto_uri ) = @_;
 
 	$self->stash_visao($c, $texto_uri);
@@ -36,7 +36,7 @@ sub visao :Path :Args(1) :Private {
 
 }
 
-sub visao_diretriz :Path :Args(2) :Private {
+sub sp2022_diretriz :Path('/sp2022') :Args(2) {
     my ( $self, $c, $texto_uri, $id_diretriz ) = @_;
 
 	$self->stash_visao($c, $texto_uri);
@@ -45,8 +45,7 @@ sub visao_diretriz :Path :Args(2) :Private {
 
 	$c->detach('RNSP::CMS::Controller::Root', 'error_404') unless
 		$self->stash_diretrizes($c, $c->stash->{visao}->{id}, $id_diretriz);
-use Data::Dumper;
-print("\n\n".Dumper $c->stash->{diretriz}{id_documento}."\n\n");
+
 	$c->forward('RNSP::CMS::Controller::Documento', 'documento', [ $c->stash->{diretriz}{id_documento} ]);
 
 }
