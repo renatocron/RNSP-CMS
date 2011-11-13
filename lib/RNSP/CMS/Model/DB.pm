@@ -7,16 +7,10 @@ __PACKAGE__->config(
     schema_class => 'RNSP::CMS::Schema',
     
     connect_info => {
-<<<<<<< HEAD
         dsn => 'dbi:SQLite:rnsp.db',
         user => '',
         password => '',
         on_connect_do => q{PRAGMA foreign_keys = ON},
-=======
-        dsn => 'dbi:SQLite:test.db',
-        user => '',
-        password => '',
->>>>>>> 53fc42ddb84b7a70240f6ee5acc1d63de1e200db
     }
 );
 
