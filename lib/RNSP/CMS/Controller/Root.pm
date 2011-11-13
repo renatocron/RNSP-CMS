@@ -39,20 +39,20 @@ sub root : Chained('base') PathPart('') Args(0) {
 
 
 # pra não ter que mudar toda a regra do 404, mudei esse cara pra regexp
-sub show_visao : Chained('base') Regex('^[a-zA-Z-,\.0-9]+$') {
-    my ( $self, $c, $visao) = @_;
-	$c->detach('RNSP::CMS::Controller::Visao', 'visao', [$visao]);
+sub show_visao : Chained('base') Regex('^([a-zA-Z-,\.0-9]+)$') {
+    my ( $self, $c) = @_;
+	$c->detach('RNSP::CMS::Controller::Visao', 'visao', $c->req->captures);
 }
 
-sub show_visao_diretriz: Chained('base') PathPart('') Args(2) {
-    my ( $self, $c, $visao, $diretriz ) = @_;
-	$c->detach('RNSP::CMS::Controller::Visao', 'visao_diretriz', [$visao, $diretriz]);
+sub show_visao_diretriz : Chained('base') Regex('^([a-zA-Z-,\.0-9]+)\/(\d+)$') {
+    my ( $self, $c ) = @_;
+	$c->detach('RNSP::CMS::Controller::Visao', 'visao_diretriz', $c->req->captures);
 
 }
 
-sub show_visao_diretriz_proposta: Chained('base') PathPart('') Args(3) {
+sub show_visao_diretriz_proposta: Chained('base') Regex('^([a-zA-Z-,\.0-9]+)\/(\d+)\/(\d+)$') {
     my ( $self, $c,$visao, $diretriz,$proposta ) = @_;
-	$c->detach('RNSP::CMS::Controller::Visao', 'visao_diretriz_proposta', [$visao, $diretriz, $proposta]);
+	$c->detach('RNSP::CMS::Controller::Visao', 'visao_diretriz_proposta', $c->req->captures);
 
 }
 
