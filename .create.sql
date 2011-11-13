@@ -9,8 +9,15 @@ create table documento (
 );
 insert into documento(titulo, texto) values ('O que é São Paulo 2022', 'São Paulo 2022 é uma iniciativa de cinco entidade');
 
-insert into documento(titulo, texto) values ('XPTO Melhor nao tentar fazer os cadastros', 'isso mesmo, porque pode causar confusao no povo: atenção com encoding ¬¬ !! ã ẽ ĩ ');
+insert into documento(titulo, texto) values (' 1 XPTO Melhor nao tentar fazer os cadastros', 'isso mesmo, porque pode causar confusao no povo: atenção com encoding ¬¬ !! ã ẽ ĩ ');
 
+insert into documento(titulo, texto) values ('2', 'texto 2');
+
+insert into documento(titulo, texto) values ('3', 'texto 3');
+
+insert into documento(titulo, texto) values ('4', 'texto 4');
+
+insert into documento(titulo, texto) values ('5', 'texto 5');
 
 
 create table visao (
@@ -24,9 +31,42 @@ create table visao (
 
 );
 
+insert into visao (id_documento,texto_uri,  texto_menu) values (
+	2, 'democratica,participativa,descentralizada',
+'Democrática
+Participativa
+Descentralizada'
+);
+insert into visao (id_documento,texto_uri,  texto_menu) values (
+	3, 'saudavel,ambientalmente-sustentavel',
+'Saudável
+Ambientalmente sustentável'
+);
+insert into visao (id_documento,texto_uri,  texto_menu) values (
+	4, 'compacta,agil,policentrica',
+'Compacta
+Ágil
+Policêntrica'
+);
+
+insert into visao (id_documento,texto_uri,  texto_menu) values (
+	5, 'inclusiva,segura,prospera',
+'Inclusiva
+Segura
+Próspera'
+);
+insert into visao (id_documento,texto_uri,  texto_menu) values (
+	6, 'educadora,criativa,conectada',
+'Educadora
+Criativa
+Conectada'
+);
+
+
 create table diretriz (
 	id INTEGER primary key,
-	id_documento integer not null
+	id_documento integer not null,
+	FOREIGN KEY (id_documento) REFERENCES documento(id)
 );
 
 create table indicador (

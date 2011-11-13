@@ -1,0 +1,17 @@
+<div class="row">
+	<div class="span16">
+		<h3 class="visoes_title">Cinco visões de uma cidade possível</h3>
+	</div>
+
+	<div class="span15 offset1">
+		[%FOREACH v = visoes %]
+			<div class="menu-[%v.id%] botao_menu">
+			[%FOREACH i = v.itens %]
+				<span>[%i%]</span><br/>
+			[%END%]
+			</div>
+		[%END%]
+		</div>
+
+	</div>
+</div>
