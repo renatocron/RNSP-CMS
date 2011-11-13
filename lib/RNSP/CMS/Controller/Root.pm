@@ -42,13 +42,13 @@ sub root : Chained('base') PathPart('') Args(0) {
 Standard 404 error page
 
 =cut
-=pod
+
 sub error_404 : Chained('base') PathPart('') Args {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'error_404.tt';
     $c->response->status(404);
 }
-=cut
+
 
 sub error_500 : Private {
     my ( $self, $c ) = @_;

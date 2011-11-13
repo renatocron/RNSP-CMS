@@ -21,7 +21,10 @@ Catalyst Controller.
 
 =cut
 
-sub sp2022 :Path('/sp2022') :Args(1) {
+sub base : Chained('/base') PathPart('sp2022') CaptureArgs(0) {}
+
+
+sub sp2022 :Chained('base') PathPart('') Args(1) {
     my ( $self, $c, $texto_uri ) = @_;
 
 	$self->stash_visao($c, $texto_uri);
@@ -36,7 +39,7 @@ sub sp2022 :Path('/sp2022') :Args(1) {
 
 }
 
-sub sp2022_diretriz :Path('/sp2022') :Args(2) {
+sub sp2022_diretriz :Chained('base') PathPart('') Args(2) {
     my ( $self, $c, $texto_uri, $id_diretriz ) = @_;
 
 	$self->stash_visao($c, $texto_uri);
