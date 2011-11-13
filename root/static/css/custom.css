@@ -29,7 +29,7 @@
 .visao-3, .menu-3 {background-color: #be526c;}
 .visao-4, .menu-4 {background-color: #7A5AA5;}
 .visao-5, .menu-5 {background-color: #E98537;}
-.botao_menu a {width: 100%; display: block;margin: 10px}
+.botao_menu a {width: 140px; display: block;padding: 10px}
 .botao_menu a, .botao_menu a:hover, .botao_menu a:visited {
 	text-decoration: none;
 	color: #DDD;
@@ -38,6 +38,7 @@
 	width: 138px;
 	margin-bottom: 10px;
 }
+.diretrizes .botao_menu a {width: 115px;}
 
 
 footer {
