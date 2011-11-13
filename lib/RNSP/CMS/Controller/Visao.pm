@@ -53,6 +53,22 @@ sub sp2022_diretriz :Chained('base') PathPart('') Args(2) {
 
 }
 
+sub sp2022_proposta :Chained('base') PathPart('') Args(3) {
+    my ( $self, $c, $texto_uri, $id_diretriz, $id_proposta ) = @_;
+
+	$self->stash_visao($c, $texto_uri);
+
+	$c->detach('RNSP::CMS::Controller::Root', 'error_404') unless (defined $c->stash->{visao});
+
+	$c->detach('RNSP::CMS::Controller::Root', 'error_404') unless
+		$self->stash_diretrizes($c, $c->stash->{visao}->{id}, $id_diretriz, $id_proposta);
+
+	$c->detach('RNSP::CMS::Controller::Root', 'error_404') unless (defined $c->stash->{proposta});
+print "\n\n", $c->stash->{proposta}{id_documento}, "\n\n";
+	$c->forward('RNSP::CMS::Controller::Documento', 'documento', [ $c->stash->{proposta}{id_documento} ]);
+
+}
+
 
 sub stash_visao : Private {
     my ( $self, $c, $texto_uri ) = @_;
@@ -71,7 +87,7 @@ sub stash_visao : Private {
 }
 
 sub stash_diretrizes : Private {
-    my ( $self, $c, $id_visao, $id_diretriz ) = @_;
+    my ( $self, $c, $id_visao, $id_diretriz, $id_proposta ) = @_;
 
 	my $diretrizes = $c->cache->get('diretrizes-'.$id_visao);
 	#unless ($diretrizes){
@@ -90,12 +106,16 @@ if(1){
 			my $propostas      = [];
 
 			foreach my $p (@propostas_rows){
-				push @$propostas, {
+				my $item = {
 					id             => $p->id,
 					titulo         => $p->id_documento->titulo,
 					texto          => $p->id_documento->texto,
 					id_documento   => $p->id_documento->id,
 				};
+				push @$propostas,$item;
+				if (defined $id_proposta && $id_proposta == $p->id){
+					$c->stash ( proposta => $item );
+				}
 			}
 
 			my $indicadores = \@indicadors;
