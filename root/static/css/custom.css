@@ -29,6 +29,10 @@
 .menu-3 {background-color: #be526c;}
 .menu-4 {background-color: #7A5AA5;}
 .menu-5 {background-color: #E98537;}
+a, a:hover, a:visited {
+	text-decoration: none;
+	color: #DDD;
+}
 
 footer {
 	margin-top: 0;

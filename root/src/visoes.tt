@@ -6,53 +6,63 @@
 	<div class="span15 offset1">
 		
 			<div class="menu-1 botao_menu">
-			
-				<span>Democrática</span><br/>
-			
-				<span>Participativa</span><br/>
-			
-				<span>Descentralizada</span><br/>
-			
+				<a href="/democratica,participativa,descentralizada">
+				
+					<span>Democrática</span><br/>
+				
+					<span>Participativa</span><br/>
+				
+					<span>Descentralizada</span><br/>
+				
+				</a>
 			</div>
 		
 			<div class="menu-2 botao_menu">
-			
-				<span>Saudável</span><br/>
-			
-				<span>Ambientalmente</span><br/>
-			
-				<span>sustentável</span><br/>
-			
+				<a href="/saudavel,ambientalmente-sustentavel">
+				
+					<span>Saudável</span><br/>
+				
+					<span>Ambientalmente</span><br/>
+				
+					<span>sustentável</span><br/>
+				
+				</a>
 			</div>
 		
 			<div class="menu-3 botao_menu">
-			
-				<span>Compacta</span><br/>
-			
-				<span>Ágil</span><br/>
-			
-				<span>Policêntrica</span><br/>
-			
+				<a href="/compacta,agil,policentrica">
+				
+					<span>Compacta</span><br/>
+				
+					<span>Ágil</span><br/>
+				
+					<span>Policêntrica</span><br/>
+				
+				</a>
 			</div>
 		
 			<div class="menu-4 botao_menu">
-			
-				<span>Inclusiva</span><br/>
-			
-				<span>Segura</span><br/>
-			
-				<span>Próspera</span><br/>
-			
+				<a href="/inclusiva,segura,prospera">
+				
+					<span>Inclusiva</span><br/>
+				
+					<span>Segura</span><br/>
+				
+					<span>Próspera</span><br/>
+				
+				</a>
 			</div>
 		
 			<div class="menu-5 botao_menu">
-			
-				<span>Educadora</span><br/>
-			
-				<span>Criativa</span><br/>
-			
-				<span>Conectada</span><br/>
-			
+				<a href="/educadora,criativa,conectada">
+				
+					<span>Educadora</span><br/>
+				
+					<span>Criativa</span><br/>
+				
+					<span>Conectada</span><br/>
+				
+				</a>
 			</div>
 		
 		</div>
