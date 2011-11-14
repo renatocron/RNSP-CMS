@@ -33,6 +33,7 @@
 		<div class="page-header">
 			<h1>[%title or 'Administração'%][%IF titlep%] <small>[%titlep%]</small>[%END%]</h1>
 		</div>
+		[%IF message %]<div class="alert-message [%IF error %]error[%ELSE%]success[%END%]"><p>[%message%]</p></div>[%END%]
 		[% content | none %]
 	</div>
 </div>

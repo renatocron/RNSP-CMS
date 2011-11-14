@@ -64,7 +64,7 @@ sub sp2022_proposta :Chained('base') PathPart('') Args(3) {
 		$self->stash_diretrizes($c, $c->stash->{visao}->{id}, $id_diretriz, $id_proposta);
 
 	$c->detach('RNSP::CMS::Controller::Root', 'error_404') unless (defined $c->stash->{proposta});
-print "\n\n", $c->stash->{proposta}{id_documento}, "\n\n";
+
 	$c->forward('RNSP::CMS::Controller::Documento', 'documento', [ $c->stash->{proposta}{id_documento} ]);
 
 }
@@ -90,8 +90,7 @@ sub stash_diretrizes : Private {
     my ( $self, $c, $id_visao, $id_diretriz, $id_proposta ) = @_;
 
 	my $diretrizes = $c->cache->get('diretrizes-'.$id_visao);
-	#unless ($diretrizes){
-if(1){
+	unless ($diretrizes){
 		my @diretrizes_rows = $c->model('DB')->resultset('Diretriz')->search({
 			id_visao => $id_visao
 		})->all;

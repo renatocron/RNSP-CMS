@@ -1,0 +1,20 @@
+<form method="post">
+<fieldset>
+	<legend>Documento</legend>
+	<div class="clearfix">
+		<label>Título</label>
+		<div class="input">
+			<input name="titulo" type="text" value="[% post.titulo OR doc.titulo %]" class="span10" required>
+		</div>
+	</div>
+	<div class="clearfix">
+		<label>Texto</label>
+		<div class="input">
+			<textarea style="height: 20em;" name="texto" required class="span10">[%post.texto OR doc.texto %]</textarea>
+		</div>
+	</div>	
+</fieldset>
+<div class="actions">
+	<button type="submit" class="btn primary">Salvar mudanças</button>
+</div>
+</form>

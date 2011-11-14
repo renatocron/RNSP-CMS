@@ -75,8 +75,25 @@ sub load : Chained('base') PathPart('') CaptureArgs(1){
 }
 sub editar: Chained('load') :  Args(0){
 	my ($self, $c) = @_;
-    $c->stash( titlep => 'Editar documento ' . $c->stash->{doc}->titulo );
+    $c->stash( titlep => 'Editar documento', post => $c->req->params );
 
+	if (%{$c->req->params} && $c->stash->{doc}) {
+		if ( $c->req->params->{titulo} && $c->req->params->{texto} ){
+			
+			if ($c->stash->{doc}->update({
+				titulo => $c->req->params->{titulo},
+				texto  => $c->req->params->{texto} 
+			})){
+				$c->stash( message => 'Alteração feita com sucesso!!' );
+				$c->cache->set("documento-" . $c->stash->{doc}->id, undef, '0');
+			}else{
+				$c->stash( message => 'Erro durante alteração', error => 1 );
+			}
+		}else{
+			$c->stash( message => 'Erro no envio do formulário', error => 1 );
+		}
+	}
+	
 }
 
 
