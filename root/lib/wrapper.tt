@@ -18,13 +18,8 @@
 	<div class="fill">
 		<div class="container">
 			<a class="brand" href="[%c.uri_for('/admin')%]">RNSP</a>
-			<ul class="nav">
-				[% IF c.user_exists%]
-					[%PROCESS admin/menu.tt%]
-				[%ELSE%]
-					<li class="active"><a href="[%c.uri_for('/admin/login')%]">Login</a></li>
-				[% END %]
-			</ul>
+			[%PROCESS admin/menu.tt APPENDCLASS=''%]
+
 			[% IF c.user_exists%]
 			<ul class="nav secondary-nav">
 				<li><a href="[%c.uri_for('/admin/logout')%]">Sair</a></li>

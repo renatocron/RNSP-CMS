@@ -1,0 +1,21 @@
+<table class="bordered-table zebra-striped condensed-table">
+<thead>
+	<tr>
+	<th>ID</th>
+	<th>Titulo</th>
+	<th>Texto</th>
+	<th>Criação</th>
+	</tr>
+</thead>
+<tbody>
+	[%FOREACH d = docs%]
+	<tr>
+	<td>[%d.id%]</td>
+	<td>[%d.titulo%]</td>
+	<td>[%d.inicio_texto%]</td>
+	<td>[%d.created_at%] <a href="[%c.uri_for('/documento',d.id, 'editar')%]">Editar</a></td>
+	</tr>
+	<tr>
+	[%END%]
+</tbody>
+</table>

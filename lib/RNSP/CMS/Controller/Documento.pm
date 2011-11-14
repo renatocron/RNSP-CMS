@@ -39,6 +39,49 @@ sub documento :Private {
     $c->stash( documento => $documento );
 }
 
+sub base : Chained('/base') PathPart('documento') CaptureArgs(0) {
+	my ($self, $c) = @_;
+    $c->stash( admin => 1, title => 'Documentos' );
+
+	
+	if (!$c->user_exists) {
+		$c->res->redirect($self->action_for('login'));
+	}
+
+}
+
+sub novo: Chained('base') : PathPart('novo') Args(0){
+
+}
+
+sub lista: Chained('base') : PathPart('lista') Args(0){
+	my ($self, $c) = @_;
+    $c->stash( titlep => 'Lista' );
+
+	my $model = $c->model('Db');
+	my @docs = $model->resultset('Documento')->all;
+
+	$c->stash( docs => \@docs );
+}
+
+sub load : Chained('base') PathPart('') CaptureArgs(1){
+	my ($self, $c, $id) = @_;
+
+	my $model = $c->model('Db');
+
+	my $doc = $model->resultset('Documento')->find($id);
+	$c->stash( doc => $doc);
+
+}
+sub editar: Chained('load') :  Args(0){
+	my ($self, $c) = @_;
+    $c->stash( titlep => 'Editar documento ' . $c->stash->{doc}->titulo );
+
+}
+
+
+
+
 
 =head1 AUTHOR
 

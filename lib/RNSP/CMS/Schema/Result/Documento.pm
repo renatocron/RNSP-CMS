@@ -143,6 +143,12 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 13:59:12
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:INY7lFk5MDRqFGK6c8M1+w
 
+sub inicio_texto {
+	my $self = shift();
+
+	my @items = split(/\s+/, $self->texto, 10);
+	return join(' ', @items[0..8] ) . '...';
+}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
