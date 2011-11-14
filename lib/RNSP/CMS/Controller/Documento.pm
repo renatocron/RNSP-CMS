@@ -51,7 +51,35 @@ sub base : Chained('/base') PathPart('documento') CaptureArgs(0) {
 }
 
 sub novo: Chained('base') : PathPart('novo') Args(0){
+	my ($self, $c) = @_;
+    $c->stash( titlep => 'Adicionar documento', post => $c->req->params );
 
+	if (%{$c->req->params}) {
+		if ( $c->req->params->{titulo} && $c->req->params->{texto} ){
+			my $model = $c->model('DB::Documento');
+			if (my $new = $model->create({
+				titulo => $c->req->params->{titulo},
+				texto  => $c->req->params->{texto} 
+			})){
+				$c->flash( message => 'Documento inserido com sucesso!!' );
+
+				$c->res->redirect($c->uri_for( '/documento', $new->id, 'editar' ) );
+				return 0;
+			}else{
+				$c->stash( message => 'Erro durante insersão', error => 1 );
+			}
+		}else{
+			$c->stash( message => 'Erro no envio do formulário', error => 1 );
+		}
+	}
+}
+
+sub apagar: Chained('load') :  Args(0){
+	my ($self, $c) = @_;
+	
+	$c->stash->{doc}->delete();
+
+	$c->res->redirect($c->uri_for( '/documento/lista' ) );
 }
 
 sub lista: Chained('base') : PathPart('lista') Args(0){
@@ -77,6 +105,11 @@ sub editar: Chained('load') :  Args(0){
 	my ($self, $c) = @_;
     $c->stash( titlep => 'Editar documento', post => $c->req->params );
 
+	# nao pode ter uma visao (pra nao sair o site do nada)
+	unless( $c->model('DB::Visao')->search({ id_documento => $c->stash->{doc}->id })->count ){
+		$c->stash( remover => 1 ) if ($c->stash->{doc}->id != 1); # nem ser a home-page
+	}
+
 	if (%{$c->req->params} && $c->stash->{doc}) {
 		if ( $c->req->params->{titulo} && $c->req->params->{texto} ){
 			
@@ -93,7 +126,9 @@ sub editar: Chained('load') :  Args(0){
 			$c->stash( message => 'Erro no envio do formulário', error => 1 );
 		}
 	}
-	
+
+	my $msg = $c->flash->{message};
+	$c->stash(message => $msg) if ($msg);
 }
 
 
