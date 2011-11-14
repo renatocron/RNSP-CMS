@@ -16,17 +16,32 @@
 [%IF admin%]
 <div class="topbar">
 	<div class="fill">
-	<div class="container">
-		<a class="brand" href="#">RNSP</a>
-		<ul class="nav">
-			<li class="active"><a href="#">Login</a></li>
+		<div class="container">
+			<a class="brand" href="[%c.uri_for('/admin')%]">RNSP</a>
+			<ul class="nav">
+				[% IF c.user_exists%]
+					[%PROCESS admin/menu.tt%]
+				[%ELSE%]
+					<li class="active"><a href="[%c.uri_for('/admin/login')%]">Login</a></li>
+				[% END %]
+			</ul>
 			[% IF c.user_exists%]
-			<li><a href="#about">About</a></li>
+			<ul class="nav secondary-nav">
+				<li><a href="[%c.uri_for('/admin/logout')%]">Sair</a></li>
+			</ul>
 			[% END %]
-		</ul>
-	</div>
+		</div>
 	</div>
 </div>
+<div class="container">
+	<div class="content">
+		<div class="page-header">
+			<h1>[%title or 'Administração'%][%IF titlep%] <small>[%titlep%]</small>[%END%]</h1>
+		</div>
+		[% content | none %]
+	</div>
+</div>
+
 [%ELSE%]
 <div class="container">
 	<div class="content">
@@ -46,6 +61,9 @@
 		</footer>
 	</div>
 </div>
-
+[%IF admin%]
+<script src="/static/script/jquery.js"></script>
+<script src="/static/script/menu.js"></script>
+[%END%]
 </body>
 </html> 

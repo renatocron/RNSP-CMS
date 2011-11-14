@@ -23,14 +23,42 @@ Catalyst Controller.
 
 sub base : Chained('/base') PathPart('admin') CaptureArgs(0) {
 	my ($self, $c) = @_;
-    $c->stash( admin => 1 );
+    $c->stash( admin => 1, titlep => 'Administração' );
+
+	unless ( $c->action eq $self->action_for('logout') || $c->action eq $self->action_for('login') ){
+		if (!$c->user_exists) {
+			$c->res->redirect($self->action_for('login'));
+		}
+	}
 }
 
-sub login : Chained('base') Args(0) {}
+sub logout : Chained('base') Args(0) {
+	my ($self, $c) = @_;
+	$c->logout();
+	$c->res->redirect('/');
+}
 
-sub root : Chained('base') PathPart('') Args(0) {
+sub login : Chained('base') Args(0) {
+	my ($self, $c) = @_;
+
+	 if (my $user     = $c->req->params->{user}
+	 and my $password = $c->req->params->{pass} ) {
+		if ( $c->authenticate( { username => $user,
+								 password => $password } ) ) {
+			$c->res->redirect('/admin');
+		} else {
+			$c->stash( titlep => 'Usuário ou senha inválidos' );
+		}
+	}
+	
+	$c->stash( title => 'autenticação' );
+
+ 
+}
+
+sub root : Chained('base'): PathPart('') Args(0) {
     my ($self, $c) = @_;
-    $c->response->body('Matched RNSP::CMS::Controller::Admin in Admin.');
+    $c->stash( title => 'Menu' );
 }
 
 

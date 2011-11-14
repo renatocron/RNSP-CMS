@@ -67,3 +67,11 @@ div.menu_visoes {
 	margin-top: 20px;
 	margin-bottom: 20px;	
 }
+/* culpe o desgracado do bootstrap por ligar o transition em tudo! */
+.btn,input,textarea{
+	-webkit-transition:0.1s linear background-position;
+	-moz-transition:0.1s linear background-position;
+	-ms-transition:0.1s linear background-position;
+	-o-transition:0.1s linear background-position;
+	transition:0.1s linear background-position;
+}

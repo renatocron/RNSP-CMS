@@ -1,1 +1,20 @@
-aa
+<form action="[%c.uri_for('/admin/login')%]" method="post">
+<fieldset>
+	<legend>Por favor, indentifique-se</legend>
+	<div class="clearfix">
+		<label>Usuário</label>
+		<div class="input">
+			<input name="user" type="text" required>
+		</div>
+	</div>
+	<div class="clearfix">
+		<label>Senha</label>
+		<div class="input">
+			<input name="pass" type="password" required>
+		</div>
+	</div>	
+</fieldset>
+<div class="actions">
+	<button type="submit" class="btn primary">Save changes</button>&nbsp;<button type="reset" class="btn">Cancel</button>
+</div>
+</form>
