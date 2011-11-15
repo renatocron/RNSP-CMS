@@ -17,7 +17,7 @@
 <div class="actions">
 	<button type="submit" class="btn primary">Salvar mudanças</button>
 	[%IF remover%]
-		<a href="[%c.uri_for('/documento',doc.id, 'apagar')%]" class="btn error" onclick="window.confirm('Deseja mesmo apagar?')" style="float: right" >remover</a>
+		<a href="[%c.uri_for('/documento',doc.id, 'apagar')%]" class="btn error" onclick="javascript:return window.confirm('Deseja mesmo apagar?')" style="float: right" >remover</a>
 	[%END%]
 </div>
 </form>

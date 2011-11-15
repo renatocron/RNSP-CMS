@@ -61,7 +61,68 @@
 		<tr>
 		<td>[% i.descricao %]</td>
 		<td>[% i.get_column('meta') %]</td>
-		<td><a href="">Remover</a></td>
+		<td><a href="[%c.uri_for('/diretriz', di.id, 'indicador_delete', i.id)%]">Remover</a></td>
+	</tr>
+	[%END%]
+</tbody>
+</table>
+
+<hr/>
+<h2>Propostas</h2>
+<form method="post" action="[%c.uri_for('/diretriz', di.id, 'proposta_save')%]">
+<fieldset>
+	<div class="clearfix">
+		<label>Documento</label>
+		<div class="input">
+			<select name="documento" class="span10" required>
+				[%FOREACH d = docs%]
+					<option value="[%d.id%]">[%d.titulo%]</option>
+				[%END%]
+			</select>
+		</div>
+	</div>
+	<div class="clearfix">
+		<label>Região</label>
+		<div class="input">
+			<select name="regiao" class="span10" required>
+				[%FOREACH r = regioes%]
+					<option value="[%r.id%]">[%r.nome%]</option>
+				[%END%]
+			</select>
+		</div>
+	</div>
+	<div class="clearfix">
+		<label>Tema</label>
+		<div class="input">
+			<select name="tema" class="span10" required>
+				[%FOREACH t = temas%]
+					<option value="[%t.id%]">[%t.nome%]</option>
+				[%END%]
+			</select>
+		</div>
+	</div>
+
+</fieldset>
+<div class="actions">
+	<button type="submit" class="btn primary">Adicionar proposta</button>
+</div>
+</form>
+<table class="bordered-table zebra-striped condensed-table">
+<thead>
+	<tr>
+		<th>Documento</th>
+		<th>Tema</th>
+		<th>Região</th>
+		<th>Opções</th>
+	</tr>
+</thead>
+<tbody>
+	[%FOREACH p = di.propostas %]
+		<tr>
+		<td>[% p.id_documento.titulo %]</td>
+		<td>[% p.id_tema.nome %]</td>
+		<td>[% p.id_regiao.nome %]</td>
+		<td><a href="[%c.uri_for('/diretriz', di.id, 'proposta_delete', p.id)%]">Remover</a></td>
 	</tr>
 	[%END%]
 </tbody>

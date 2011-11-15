@@ -75,3 +75,4 @@ div.menu_visoes {
 	-o-transition:0.1s linear background-position;
 	transition:0.1s linear background-position;
 }
+select { background-color: white }

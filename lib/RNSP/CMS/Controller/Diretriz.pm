@@ -112,9 +112,27 @@ sub load : Chained('base') PathPart('') CaptureArgs(1){
 
 	my $di = $model->resultset('Diretriz')->find($id);
 	$c->stash( di => $di);
-
 }
 
+
+sub indicador_delete: Chained('load'): Args(1){
+	my ($self, $c, $id) = @_;
+
+	my $model = $c->model('Db');
+	$model->resultset('Indicador')->find($id)->delete;
+
+	$c->res->redirect($c->uri_for('/diretriz', $c->stash->{di}->id, 'editar'));
+}
+
+
+sub proposta_delete: Chained('load'): Args(1){
+	my ($self, $c, $id) = @_;
+
+	my $model = $c->model('Db');
+	eval{$model->resultset('Proposta')->find($id)->delete};
+
+	$c->res->redirect($c->uri_for('/diretriz', $c->stash->{di}->id, 'editar'));
+}
 
 sub indicador_save: Chained('load'):  Args(0){
 	my ($self, $c) = @_;
@@ -139,6 +157,32 @@ sub indicador_save: Chained('load'):  Args(0){
 
 }
 
+sub proposta_save: Chained('load'):  Args(0){
+	my ($self, $c) = @_;
+
+	if (   $c->req->params->{documento} =~ /^\d+$/
+		&& $c->req->params->{regiao}    =~ /^\d+$/
+		&& $c->req->params->{tema}      =~ /^\d+$/) {
+
+		if ( eval{$c->stash->{di}->propostas->create({
+				id_tema      => $c->req->params->{tema},
+				id_regiao    => $c->req->params->{regiao},
+				id_documento => $c->req->params->{documento},
+			}) }){
+			$c->flash( message => 'Proposta criada com sucesso!' );
+			$c->cache->set('diretrizes-'.$c->req->params->{visao}, undef, '0min');
+
+		}else{
+			$c->flash( message => 'Erro ao criar proposta', error=>1 );
+		}
+	}else{
+		$c->flash( message => 'Erro no POST', error=>1 );
+	}
+	$c->res->redirect($c->uri_for('/diretriz', $c->stash->{di}->id, 'editar'));
+
+}
+
+
 sub editar: Chained('load') :  Args(0){
 	my ($self, $c) = @_;
 
@@ -152,8 +196,14 @@ sub editar: Chained('load') :  Args(0){
 	my @visoes = $model->resultset('Visao')->all;
 	$c->stash( visoes => \@visoes);
 
+	my @temas = $model->resultset('Tema')->all;
+	$c->stash( temas => \@temas);
+	
+	my @regioes = $model->resultset('Regiao')->all;
+	$c->stash( regioes => \@regioes);
+
 	my $msg = $c->flash->{message};
-	$c->stash(message => $msg) if ($msg);
+	$c->stash(message => $msg, error => $c->flash->{error}) if ($msg);
 }
 
 sub editar_save: Chained('load') :  Args(0){
@@ -165,10 +215,10 @@ sub editar_save: Chained('load') :  Args(0){
 		my $id_visao_old = $c->stash->{di}->id_visao->id;
 		$c->cache->set('diretrizes-'.$id_visao_old, undef, '0min');
 
-		if ( $c->stash->{di}->update({
+		if ( eval{$c->stash->{di}->update({
 				id_documento => $c->req->params->{documento},
 				id_visao     => $c->req->params->{visao}
-			}) ){
+			})} ){
 			$c->flash( message => 'Diretriz alterada com sucesso!' );
 			$c->cache->set('diretrizes-'.$c->req->params->{visao}, undef, '0min');
 			

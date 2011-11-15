@@ -77,7 +77,11 @@ sub novo: Chained('base') : PathPart('novo') Args(0){
 sub apagar: Chained('load') :  Args(0){
 	my ($self, $c) = @_;
 	
-	$c->stash->{doc}->delete();
+	eval{$c->stash->{doc}->delete()};
+	if ($@){
+		my $fk = $@ =~ /foreign key constraint/i ? 'Documento ainda em uso!': '';
+		$c->flash( error => 1, message => 'Erro ao apagar! ' . $fk );
+	}
 
 	$c->res->redirect($c->uri_for( '/documento/lista' ) );
 }
@@ -90,6 +94,9 @@ sub lista: Chained('base') : PathPart('lista') Args(0){
 	my @docs = $model->resultset('Documento')->all;
 
 	$c->stash( docs => \@docs );
+
+	my $msg = $c->flash->{message};
+	$c->stash(message => $msg, error => $c->flash->{error}) if ($msg);
 }
 
 sub load : Chained('base') PathPart('') CaptureArgs(1){
