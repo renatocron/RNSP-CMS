@@ -28,6 +28,25 @@
 </form>
 <hr/>
 <h2>Indicadores</h2>
+<table class="bordered-table zebra-striped condensed-table">
+<thead>
+	<tr>
+		<th>Descrição</th>
+		<th>Meta</th>
+		<th>Opções</th>
+	</tr>
+</thead>
+<tbody>
+	[%FOREACH i = di.indicadors%]
+		<tr>
+		<td>[% i.descricao %]</td>
+		<td>[% i.get_column('meta') %]</td>
+		<td><a href="[%c.uri_for('/diretriz', di.id, 'indicador_delete', i.id)%]">Remover</a></td>
+	</tr>
+	[%END%]
+</tbody>
+</table>
+
 <form method="post" action="[%c.uri_for('/diretriz', di.id, 'indicador_save')%]">
 <fieldset>
 	<legend>Novo indicador</legend>
@@ -48,29 +67,34 @@
 	<button type="submit" class="btn primary">Adicionar indicador</button>
 </div>
 </form>
+
+<hr/>
+<h2>Propostas</h2>
+
 <table class="bordered-table zebra-striped condensed-table">
 <thead>
 	<tr>
-		<th>Descrição</th>
-		<th>Meta</th>
+		<th>Documento</th>
+		<th>Tema</th>
+		<th>Região</th>
 		<th>Opções</th>
 	</tr>
 </thead>
 <tbody>
-	[%FOREACH i = di.indicadors%]
+	[%FOREACH p = di.propostas %]
 		<tr>
-		<td>[% i.descricao %]</td>
-		<td>[% i.get_column('meta') %]</td>
-		<td><a href="[%c.uri_for('/diretriz', di.id, 'indicador_delete', i.id)%]">Remover</a></td>
+		<td>[% p.id_documento.titulo %]</td>
+		<td>[% p.id_tema.nome %]</td>
+		<td>[% p.id_regiao.nome %]</td>
+		<td><a href="[%c.uri_for('/diretriz', di.id, 'proposta_delete', p.id)%]">Remover</a></td>
 	</tr>
 	[%END%]
 </tbody>
 </table>
 
-<hr/>
-<h2>Propostas</h2>
 <form method="post" action="[%c.uri_for('/diretriz', di.id, 'proposta_save')%]">
 <fieldset>
+	<legend>Nova proposta</legend>
 	<div class="clearfix">
 		<label>Documento</label>
 		<div class="input">
@@ -107,23 +131,3 @@
 	<button type="submit" class="btn primary">Adicionar proposta</button>
 </div>
 </form>
-<table class="bordered-table zebra-striped condensed-table">
-<thead>
-	<tr>
-		<th>Documento</th>
-		<th>Tema</th>
-		<th>Região</th>
-		<th>Opções</th>
-	</tr>
-</thead>
-<tbody>
-	[%FOREACH p = di.propostas %]
-		<tr>
-		<td>[% p.id_documento.titulo %]</td>
-		<td>[% p.id_tema.nome %]</td>
-		<td>[% p.id_regiao.nome %]</td>
-		<td><a href="[%c.uri_for('/diretriz', di.id, 'proposta_delete', p.id)%]">Remover</a></td>
-	</tr>
-	[%END%]
-</tbody>
-</table>

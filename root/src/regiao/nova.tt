@@ -1,0 +1,14 @@
+<form method="post">
+<fieldset>
+	<legend>Região</legend>
+	<div class="clearfix">
+		<label>Nome</label>
+		<div class="input">
+			<input name="nome" type="text" value="[% post.nome OR regiao.nome %]" class="span10" required>
+		</div>
+	</div>
+</fieldset>
+<div class="actions">
+	<button type="submit" class="btn primary">Adicionar região</button>
+</div>
+</form>

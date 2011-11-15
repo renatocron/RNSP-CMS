@@ -1,0 +1,17 @@
+<form method="post">
+<fieldset>
+	<legend>Região</legend>
+	<div class="clearfix">
+		<label>Nome</label>
+		<div class="input">
+			<input name="nome" type="text" value="[% post.nome OR regiao.nome %]" class="span10" required>
+		</div>
+	</div>
+</fieldset>
+<div class="actions">
+	<button type="submit" class="btn primary">Salvar mudanças</button>
+	
+	<a href="[%c.uri_for('/regiao',regiao.id, 'apagar')%]" class="btn error" onclick="javascript:return window.confirm('Deseja mesmo apagar?')" style="float: right" >remover</a>
+
+</div>
+</form>

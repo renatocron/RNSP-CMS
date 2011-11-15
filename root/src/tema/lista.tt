@@ -1,0 +1,17 @@
+<table class="bordered-table zebra-striped condensed-table">
+<thead>
+	<tr>
+	<th>ID</th>
+	<th>Nome</th>
+	</tr>
+</thead>
+<tbody>
+	[%FOREACH d = temas %]
+	<tr>
+		<td>[%d.id%]</td>
+		<td>[%d.nome%] <a href="[%c.uri_for('/tema',d.id, 'editar')%]">Editar</a></td>
+		</tr>
+	</tr>
+	[%END%]
+</tbody>
+</table>

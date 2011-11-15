@@ -17,10 +17,18 @@
 		</li>
 
 		<li class="dropdown" data-dropdown=1>
-			<a href="#" class="dropdown-toggle">Propostas</a>
+			<a href="#" class="dropdown-toggle">Temas</a>
 			<ul class="dropdown-menu[%APPENDCLASS%]" >
-				<li><a href="#">Nova proposta</a></li>
-				<li><a href="#">Listar propostas</a></li>
+				<li><a href="[%c.uri_for('/tema/novo')%]">Novo</a></li>
+				<li><a href="[%c.uri_for('/tema/lista')%]">Lista</a></li>
+			</ul>
+		</li>
+
+		<li class="dropdown" data-dropdown=1>
+			<a href="#" class="dropdown-toggle">Regiões</a>
+			<ul class="dropdown-menu[%APPENDCLASS%]" >
+				<li><a href="[%c.uri_for('/regiao/nova')%]">Nova</a></li>
+				<li><a href="[%c.uri_for('/regiao/lista')%]">Lista</a></li>
 			</ul>
 		</li>
 

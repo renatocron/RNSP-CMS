@@ -1,0 +1,14 @@
+<form method="post">
+<fieldset>
+	<legend>Tema</legend>
+	<div class="clearfix">
+		<label>Nome</label>
+		<div class="input">
+			<input name="nome" type="text" value="[% post.nome OR tema.nome %]" class="span10" required>
+		</div>
+	</div>
+</fieldset>
+<div class="actions">
+	<button type="submit" class="btn primary">Adicionar tema</button>
+</div>
+</form>

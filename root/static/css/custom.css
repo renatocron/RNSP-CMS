@@ -34,11 +34,12 @@
 	text-decoration: none;
 	color: #DDD;
 }
-.diretrizes .botao_menu {
+.propostas .botao_menu , .diretrizes .botao_menu {
 	width: 138px;
 	margin-bottom: 10px;
 }
-.diretrizes .botao_menu a {width: 115px;}
+.propostas .botao_menu a, .diretrizes .botao_menu a {width: 115px;}
+ 
 .visao-1.active {background-color: #82a8cc;}
 .visao-2.active {background-color: #65b497;}
 .visao-3.active {background-color: #be526c;}
