@@ -1,41 +1,27 @@
-<h2>Documentos X diretrizes</h2>
 <div class="row">
 <div class="span16">
-<form method="post">
+
 <table class="bordered-table zebra-striped condensed-table">
 	<thead>
-		<th>Documento</th>
-		[%FOREACH v = visoes%]
-			<th title="[%v.texto_menu%]">[%v.id%]</th>
-		[%END%]
+		<tr>	
+			<th>Diretriz</th>
+			<th>Indicadores</th>
+			<th>Propostas</th>
+		</tr>
 	</thead>
 	<tbody>
-		[%FOREACH d = docs%]
+	[%FOREACH v = visoes s%]
+		<tr><td colspan="3"><b>[%v.texto_menu%]</b></td></tr>
+		[%FOREACH di = v.diretrizzes%]
 		<tr>
-			<td title="documento id [%d.id%]">[%d.titulo%]</td>
-			[%FOREACH v = visoes%]
-				[% SET found = undef %]
-				[% FOREACH di = v.diretrizzes %]
-					[% IF di.id_documento.id == d.id %]
-						[% SET found = 1 %]
-						<td><input type="checkbox" value="[%di.id%]" name="diretriz[[%d.id%]][[%v.id%]]" checked="checked" /></td>
-					[%END%]
-				[%END%]
-				[%IF !found%]
-					<td><input type="checkbox" value="-1" name="diretriz[[%d.id%]][[%v.id%]]" /></td>
-				[%END%]
-			[%END%]
+			<td><a title="editar" href="[%c.uri_for('/diretriz', di.id, 'editar')%]">[%di.id_documento.titulo%]</a></td>
+			<td>[% SET global.c = 0 %][% FOREACH di.indicadors %][% global.c = global.c + 1 %][%END%][%global.c%]</td>
+			<td>[% SET global.c = 0 %][% FOREACH di.propostas %][% global.c = global.c + 1 %][%END%][%global.c%]</td>
 		</tr>
-		<tr>
 		[%END%]
+	[%END%]
 	</tbody>
 </table>
-[%FOREACH v = visoes%]
-	<p><b>[%v.id%]</b>: [%v.texto_menu%]</p>
-[%END%]
-<div class="actions">
-	<input type="submit" class="btn primary" value="Salvar">
-</div>
-</form>
+
 </div>
 </div>

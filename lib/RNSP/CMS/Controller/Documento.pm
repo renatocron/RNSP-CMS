@@ -101,6 +101,7 @@ sub load : Chained('base') PathPart('') CaptureArgs(1){
 	$c->stash( doc => $doc);
 
 }
+
 sub editar: Chained('load') :  Args(0){
 	my ($self, $c) = @_;
     $c->stash( titlep => 'Editar documento', post => $c->req->params );

@@ -36,7 +36,19 @@ sub lista: Chained('base') : PathPart('lista') Args(0){
 	my ($self, $c) = @_;
     $c->stash( titlep => 'Lista' );
 
-	$self->_save($c) if (%{$c->req->params});
+	my $model = $c->model('Db');
+	my @visoes = $model->resultset('Visao')->search(undef, {
+			prefetch => ['diretrizzes'], order_by => 'me.id'
+	})->all;
+	$c->stash( visoes => \@visoes );
+
+}
+
+sub por_visao: Chained('base') : PathPart('por_visao') Args(0){
+	my ($self, $c) = @_;
+    $c->stash( titlep => 'Por visão' );
+
+	$self->por_visao_save($c) if (%{$c->req->params});
 
 	my $model = $c->model('Db');
 
@@ -48,7 +60,7 @@ sub lista: Chained('base') : PathPart('lista') Args(0){
 
 }
 
-sub _save: Private {
+sub por_visao_save: Private {
 	my ($self, $c) = @_;
     
 	my $model = $c->model('Db');
@@ -92,6 +104,59 @@ sub _save: Private {
 	}
 
 }
+
+sub load : Chained('base') PathPart('') CaptureArgs(1){
+	my ($self, $c, $id) = @_;
+
+	my $model = $c->model('Db');
+
+	my $di = $model->resultset('Diretriz')->find($id);
+	$c->stash( di => $di);
+
+}
+
+sub editar: Chained('load') :  Args(0){
+	my ($self, $c) = @_;
+
+	$c->stash( titlep => 'Editar' );
+
+	my $model = $c->model('Db');
+
+	my @docs = $model->resultset('Documento')->all;
+	$c->stash( docs => \@docs );
+
+	my @visoes = $model->resultset('Visao')->all;
+	$c->stash( visoes => \@visoes);
+
+	my $msg = $c->flash->{message};
+	$c->stash(message => $msg) if ($msg);
+}
+
+sub editar_save: Chained('load') :  Args(0){
+	my ($self, $c) = @_;
+
+	if (   $c->req->params->{documento} =~ /^\d+$/
+		&& $c->req->params->{visao}     =~ /^\d+$/) {
+
+		my $id_visao_old = $c->stash->{di}->id_visao->id;
+		$c->cache->set('diretrizes-'.$id_visao_old, undef, '0min');
+
+		if ( $c->stash->{di}->update({
+				id_documento => $c->req->params->{documento},
+				id_visao     => $c->req->params->{visao}
+			}) ){
+			$c->flash( message => 'Diretriz alterada com sucesso!' );
+			$c->cache->set('diretrizes-'.$c->req->params->{visao}, undef, '0min');
+			
+		}else{
+			$c->flash( message => 'Erro ao atualizar diretriz', error=>1 );
+		}
+	}else{
+		$c->flash( message => 'Erro no POST', error=>1 );
+	}
+	$c->res->redirect($c->uri_for('/diretriz', $c->stash->{di}->id, 'editar'));
+}
+
 =head1 AUTHOR
 
 Renato santos,,,
