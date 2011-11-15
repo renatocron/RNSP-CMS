@@ -91,6 +91,7 @@ insert into indicador (id_diretriz, descricao) values (1, '98654');
 insert into indicador (id_diretriz, descricao) values (2, '888888');
 insert into indicador (id_diretriz, descricao) values (2, 'HHHHH');
 
+alter table indicador add meta varchar not null default 'meta';
 
 create table tema (
 	id INTEGER primary key,

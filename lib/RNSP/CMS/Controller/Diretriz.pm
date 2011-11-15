@@ -115,6 +115,30 @@ sub load : Chained('base') PathPart('') CaptureArgs(1){
 
 }
 
+
+sub indicador_save: Chained('load'):  Args(0){
+	my ($self, $c) = @_;
+
+	if (   $c->req->params->{descricao}
+		&& $c->req->params->{meta}) {
+
+		if ( $c->stash->{di}->indicadors->create({
+				meta      => $c->req->params->{meta},
+				descricao => $c->req->params->{descricao}
+			}) ){
+			$c->flash( message => 'Indicador criado com sucesso!' );
+			$c->cache->set('diretrizes-'.$c->req->params->{visao}, undef, '0min');
+
+		}else{
+			$c->flash( message => 'Erro ao criar indicador', error=>1 );
+		}
+	}else{
+		$c->flash( message => 'Erro no POST', error=>1 );
+	}
+	$c->res->redirect($c->uri_for('/diretriz', $c->stash->{di}->id, 'editar'));
+
+}
+
 sub editar: Chained('load') :  Args(0){
 	my ($self, $c) = @_;
 

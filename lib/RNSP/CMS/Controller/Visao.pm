@@ -90,7 +90,8 @@ sub stash_diretrizes : Private {
     my ( $self, $c, $id_visao, $id_diretriz, $id_proposta ) = @_;
 
 	my $diretrizes = $c->cache->get('diretrizes-'.$id_visao);
-	unless ($diretrizes){
+	#unless ($diretrizes){
+if(1){
 		my @diretrizes_rows = $c->model('DB')->resultset('Diretriz')->search({
 			id_visao => $id_visao
 		})->all;
@@ -118,6 +119,8 @@ sub stash_diretrizes : Private {
 			}
 
 			my $indicadores = \@indicadors;
+use DDP;
+p$indicadores;
 			push @$diretrizes, {
 				id_documento  => $d->id_documento->id,
 				id            => $d->id,

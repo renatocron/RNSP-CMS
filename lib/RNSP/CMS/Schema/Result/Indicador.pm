@@ -57,6 +57,13 @@ __PACKAGE__->table("indicador");
   data_type: 'varchar'
   is_nullable: 1
 
+=head2 meta
+
+  accessor: 'column_meta'
+  data_type: 'varchar'
+  default_value: 'meta'
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -66,6 +73,13 @@ __PACKAGE__->add_columns(
   { data_type => "int", is_foreign_key => 1, is_nullable => 1 },
   "descricao",
   { data_type => "varchar", is_nullable => 1 },
+  "meta",
+  {
+    accessor      => "column_meta",
+    data_type     => "varchar",
+    default_value => "meta",
+    is_nullable   => 0,
+  },
 );
 
 =head1 PRIMARY KEY
@@ -103,8 +117,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 13:24:16
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Jpebkup21SEhJ4358+YIJw
+# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-15 18:16:08
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lDq/+wF+TsTTMkqhidzzAg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

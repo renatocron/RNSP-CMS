@@ -11,7 +11,7 @@
 
 			<ul>
 			[%FOREACH i = diretriz.indicadores %]
-				<li>[%i.descricao%]</li>
+				<li><p>[%i.descricao%]</p><p><b>META: </b>[%i.meta%]<p></li>
 			[%END%]
 			</ul>
 		[%END%]
