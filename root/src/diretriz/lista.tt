@@ -1,0 +1,41 @@
+<h2>Documentos X diretrizes</h2>
+<div class="row">
+<div class="span16">
+<form method="post">
+<table class="bordered-table zebra-striped condensed-table">
+	<thead>
+		<th>Documento</th>
+		[%FOREACH v = visoes%]
+			<th title="[%v.texto_menu%]">[%v.id%]</th>
+		[%END%]
+	</thead>
+	<tbody>
+		[%FOREACH d = docs%]
+		<tr>
+			<td title="documento id [%d.id%]">[%d.titulo%]</td>
+			[%FOREACH v = visoes%]
+				[% SET found = undef %]
+				[% FOREACH di = v.diretrizzes %]
+					[% IF di.id_documento.id == d.id %]
+						[% SET found = 1 %]
+						<td><input type="checkbox" value="[%di.id%]" name="diretriz[[%d.id%]][[%v.id%]]" checked="checked" /></td>
+					[%END%]
+				[%END%]
+				[%IF !found%]
+					<td><input type="checkbox" value="-1" name="diretriz[[%d.id%]][[%v.id%]]" /></td>
+				[%END%]
+			[%END%]
+		</tr>
+		<tr>
+		[%END%]
+	</tbody>
+</table>
+[%FOREACH v = visoes%]
+	<p><b>[%v.id%]</b>: [%v.texto_menu%]</p>
+[%END%]
+<div class="actions">
+	<input type="submit" class="btn primary" value="Salvar">
+</div>
+</form>
+</div>
+</div>

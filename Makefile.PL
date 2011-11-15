@@ -27,6 +27,7 @@ requires 'Catalyst::Plugin::Session';
 requires 'Catalyst::Plugin::Session::State::Cookie';
 requires 'Catalyst::Plugin::Session::Store::Cache';
 requires 'Catalyst::Plugin::Session::PerUser';
+requires 'Catalyst::Plugin::Params::Nested';
 
 requires 'Catalyst::Authentication::Credential::Password';
 

@@ -30,6 +30,8 @@ use Catalyst qw/
 
 	Cache
 
+	Params::Nested
+
   /;
 
 extends 'Catalyst';
