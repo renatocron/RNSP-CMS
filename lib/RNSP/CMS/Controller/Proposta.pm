@@ -114,6 +114,8 @@ sub boa_pratica_delete: Chained('load'): Args(1){
 	my $model = $c->model('Db');
 	if(eval{$model->resultset('BoaPratica')->find($id)->delete}){
 		$c->flash( message => 'Boa prática removida!' );
+		$c->cache->set("diretrizes-" . $_->id, undef, '0')
+					for ($c->model('DB::Diretriz')->all);
 	}
 
 	$c->res->redirect($c->uri_for('/proposta', $c->stash->{proposta}->id, 'editar'));

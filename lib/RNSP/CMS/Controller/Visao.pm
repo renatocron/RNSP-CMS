@@ -90,8 +90,8 @@ sub stash_diretrizes : Private {
     my ( $self, $c, $id_visao, $id_diretriz, $id_proposta ) = @_;
 
 	my $diretrizes = $c->cache->get('diretrizes-'.$id_visao);
-	#unless ($diretrizes){
-if(1){
+
+	unless (defined $diretrizes){
 		my @diretrizes_rows = $c->model('DB')->resultset('Diretriz')->search({
 			id_visao => $id_visao
 		})->all;
@@ -123,9 +123,7 @@ if(1){
 					regiao         => $p->id_regiao->nome,
 				};
 				push @$propostas,$item;
-				if (defined $id_proposta && $id_proposta == $p->id){
-					$c->stash ( proposta => $item );
-				}
+				
 			}
 			my $indicadores = \@indicadors;
 
@@ -140,6 +138,15 @@ if(1){
 		}
 		$c->cache->set('diretrizes-'.$id_visao, $diretrizes, '14min');
 
+	}
+
+	foreach my $diretriz (@$diretrizes){
+		foreach my $p (@{$diretriz->{propostas}}){
+			if (defined $id_proposta && $id_proposta == $p->{id}){
+				$c->stash ( proposta => $p );
+				last();
+			}
+		}
 	}
 
 	$c->stash( diretrizes => $diretrizes );
