@@ -1,14 +1,16 @@
 <form method="post" action="[%c.uri_for('/diretriz', di.id, 'editar_save')%]">
 <fieldset>
-	<legend>Documento e visão</legend>
+	<legend>Diretriz</legend>
 	<div class="clearfix">
-		<label>Documento</label>
+		<label>Título</label>
 		<div class="input">
-			<select name="documento" class="span10" required>
-				[%FOREACH d = docs%]
-					<option value="[%d.id%]" [%IF di.id_documento.id == d.id%]selected="selected"[%END%] >[%d.titulo%]</option>
-				[%END%]
-			</select>
+			<input name="documento_titulo" class="span10" required value="[%di.id_documento.titulo%]" />
+		</div>
+	</div>
+	<div class="clearfix">
+		<label>Texto</label>
+		<div class="input">
+			<textarea name="documento_texto" style="height: 20em;" class="span10" required>[%di.id_documento.texto%]</textarea>
 		</div>
 	</div>
 	<div class="clearfix">

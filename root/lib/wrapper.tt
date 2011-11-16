@@ -52,8 +52,10 @@
 <div class="fill footer_fill">
 	<div class="container">
 		<footer>
-			<a href="[%c.uri_for('/')%]">O que é São Paulo 2022</a> | 
-			<a href="http://brasil.pm.org/">Desenvolvido por Perl Mongers</a>
+			<a href="[%c.uri_for('/')%]">O que é São Paulo 2022</a><br/>
+			<p>
+			<a href=" http://sao-paulo.pm.org ">Apoiado por São Paulo Perl Mongers</a> e <a href="http://www.opendatabr.org/">Opendata-BR</a>
+			</p>
 		</footer>
 	</div>
 </div>

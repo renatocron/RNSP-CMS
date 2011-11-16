@@ -27,7 +27,7 @@ sub base : Chained('/base') PathPart('diretriz') CaptureArgs(0) {
     $c->stash( admin => 1, title => 'Diretrizes' );
 
 	if (!$c->user_exists) {
-		$c->res->redirect($self->action_for('login'));
+		$c->res->redirect('/admin/login'); return 0;
 	}
 
 }
@@ -119,7 +119,9 @@ sub indicador_delete: Chained('load'): Args(1){
 	my ($self, $c, $id) = @_;
 
 	my $model = $c->model('Db');
-	$model->resultset('Indicador')->find($id)->delete;
+	eval{$model->resultset('Indicador')->find($id)->delete};
+
+	$c->cache->set('diretrizes-'.$c->stash->{di}->id_visao->id, undef, '0min');
 
 	$c->res->redirect($c->uri_for('/diretriz', $c->stash->{di}->id, 'editar'));
 }
@@ -130,6 +132,8 @@ sub proposta_delete: Chained('load'): Args(1){
 
 	my $model = $c->model('Db');
 	eval{$model->resultset('Proposta')->find($id)->delete};
+
+	$c->cache->set('diretrizes-'.$c->stash->{di}->id_visao->id, undef, '0min');
 
 	$c->res->redirect($c->uri_for('/diretriz', $c->stash->{di}->id, 'editar'));
 }
@@ -145,7 +149,7 @@ sub indicador_save: Chained('load'):  Args(0){
 				descricao => $c->req->params->{descricao}
 			}) ){
 			$c->flash( message => 'Indicador criado com sucesso!' );
-			$c->cache->set('diretrizes-'.$c->req->params->{visao}, undef, '0min');
+			$c->cache->set('diretrizes-'.$c->stash->{di}->id_visao->id, undef, '0min');
 
 		}else{
 			$c->flash( message => 'Erro ao criar indicador', error=>1 );
@@ -182,6 +186,47 @@ sub proposta_save: Chained('load'):  Args(0){
 
 }
 
+sub nova: Chained('base') :  Args(0){
+	my ($self, $c) = @_;
+
+	$c->stash( titlep => 'Nova' );
+
+	my $model = $c->model('Db');
+	my @visoes = $model->resultset('Visao')->all;
+	$c->stash( visoes => \@visoes);
+
+}
+
+
+sub save: Chained('base') :  Args(0){
+	my ($self, $c) = @_;
+
+	if (   $c->req->params->{documento_texto}
+		&& $c->req->params->{documento_titulo}
+		&& $c->req->params->{visao}     =~ /^\d+$/) {
+		my $doc_rs = $c->model('Db::Documento');
+		my ($doc, $di);
+		if ( $doc = eval{$doc_rs->create({
+				texto  => $c->req->params->{documento_texto},
+				titulo => $c->req->params->{documento_titulo}
+			})}
+			and $di = eval{$doc->diretrizzes->create({
+				id_visao     => $c->req->params->{visao}
+			})} ){
+			$c->flash( message => 'Diretriz adicionada com sucesso!' );
+			$c->cache->set('diretrizes-'.$c->req->params->{visao}, undef, '0min');
+
+			$c->res->redirect($c->uri_for('/diretriz', $di->id, 'editar'));
+			return;
+		}else{
+			$c->flash( message => 'Erro ao atualizar diretriz', error=>1 );
+		}
+	}else{
+		$c->flash( message => 'Erro no POST', error=>1 );
+	}
+
+	$c->res->redirect($c->uri_for('/diretriz', 'nova'));
+}
 
 sub editar: Chained('load') :  Args(0){
 	my ($self, $c) = @_;
@@ -209,14 +254,18 @@ sub editar: Chained('load') :  Args(0){
 sub editar_save: Chained('load') :  Args(0){
 	my ($self, $c) = @_;
 
-	if (   $c->req->params->{documento} =~ /^\d+$/
+	if (   $c->req->params->{documento_texto}
+		&& $c->req->params->{documento_titulo}
 		&& $c->req->params->{visao}     =~ /^\d+$/) {
 
 		my $id_visao_old = $c->stash->{di}->id_visao->id;
 		$c->cache->set('diretrizes-'.$id_visao_old, undef, '0min');
 
-		if ( eval{$c->stash->{di}->update({
-				id_documento => $c->req->params->{documento},
+		if ( eval{$c->stash->{di}->id_documento->update({
+				texto  => $c->req->params->{documento_texto},
+				titulo => $c->req->params->{documento_titulo}
+			})}
+			&& eval{$c->stash->{di}->update({
 				id_visao     => $c->req->params->{visao}
 			})} ){
 			$c->flash( message => 'Diretriz alterada com sucesso!' );

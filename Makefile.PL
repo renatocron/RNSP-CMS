@@ -37,7 +37,10 @@ requires 'HTML::BBCode';
 requires 'Template::Plugin::HTML::BBCode';
 
 requires 'Catalyst::Authentication::Credential::Password';
-
+requires 'Catalyst::Restarter';
+requires 'Cache::FileCache';
+requires 'Catalyst::View::TT';
+requires 'Catalyst::Model::DBIC::Schema';
 catalyst;
 
 install_script glob('script/*.pl');

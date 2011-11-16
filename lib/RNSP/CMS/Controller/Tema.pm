@@ -11,7 +11,7 @@ sub base : Chained('/base') PathPart('tema') CaptureArgs(0) {
 
 
 	if (!$c->user_exists) {
-		$c->res->redirect($self->action_for('login'));
+		$c->res->redirect('/admin/login'); return 0;
 	}
 
 }

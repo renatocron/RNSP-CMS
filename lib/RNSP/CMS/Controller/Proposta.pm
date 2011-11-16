@@ -11,7 +11,7 @@ sub base : Chained('/base') PathPart('proposta') CaptureArgs(0) {
     $c->stash( admin => 1, title => 'Propostas' );
 
 	if (!$c->user_exists) {
-		$c->res->redirect($self->action_for('login'));
+		$c->res->redirect('/admin/login'); return 0;
 	}
 
 }

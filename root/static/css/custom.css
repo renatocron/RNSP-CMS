@@ -51,6 +51,10 @@ footer {
 	border: 0;
 	margin-bottom: 30px;
 }
+.container > footer p {
+	text-align: center; /* center align it with the container */
+}
+
 div.documento {margin-right: 20px}
 div.documento h1 {
 	text-align: center;

@@ -1,5 +1,6 @@
 <ul class="nav[%APPENDCLASS%]">
 	[% IF c.user_exists%]
+<!--
 		<li class="dropdown" data-dropdown=1>
 			<a href="#" class="dropdown-toggle">Documentos</a>
 			<ul class="dropdown-menu[%APPENDCLASS%]" >
@@ -7,11 +8,11 @@
 				<li><a href="[%c.uri_for('/documento/lista')%]">Listar documentos</a></li>
 			</ul>
 		</li>
-
+-->
 		<li class="dropdown" data-dropdown=1>
 			<a href="#" class="dropdown-toggle">Diretrizes</a>
 			<ul class="dropdown-menu[%APPENDCLASS%]" >
-				<li><a href="[%c.uri_for('/diretriz/por_visao')%]">Diretrizes por visão</a></li>
+				<li><a href="[%c.uri_for('/diretriz/nova')%]">Nova</a></li>
 				<li><a href="[%c.uri_for('/diretriz/lista')%]">Lista</a></li>
 			</ul>
 		</li>

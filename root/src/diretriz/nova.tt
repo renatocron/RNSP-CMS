@@ -1,0 +1,30 @@
+<form method="post" action="[%c.uri_for('/diretriz', 'save')%]">
+<fieldset>
+	<legend>Diretriz</legend>
+	<div class="clearfix">
+		<label>Título</label>
+		<div class="input">
+			<input name="documento_titulo" class="span10" required value="[%di.id_documento.titulo%]" />
+		</div>
+	</div>
+	<div class="clearfix">
+		<label>Texto</label>
+		<div class="input">
+			<textarea name="documento_texto" style="height: 20em;" class="span10" required>[%di.id_documento.texto%]</textarea>
+		</div>
+	</div>
+	<div class="clearfix">
+		<label>Visão</label>
+		<div class="input">
+			<select name="visao" class="span10" required>
+				[%FOREACH v = visoes%]
+					<option value="[%v.id%]" [%IF di.id_visao.id == v.id%]selected="selected"[%END%] >[%v.texto_menu%]</option>
+				[%END%]
+			</select>
+		</div>
+	</div>
+</fieldset>
+<div class="actions">
+	<button type="submit" class="btn primary">Adicionar diretriz</button>
+</div>
+</form>
