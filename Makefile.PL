@@ -20,8 +20,9 @@ requires 'Config::General'; # This should reflect the config file format you've 
                  # See Catalyst::Plugin::ConfigLoader for supported formats
 test_requires 'Test::More' => '0.88';
 
+requires 'MooseX::NonMoose';
 requires 'Catalyst::Plugin::Authorization';
-
+requires 'CatalystX::Component::Traits' => 0.16;
 requires 'Catalyst::Plugin::Cache';
 requires 'Catalyst::Plugin::Session';
 requires 'Catalyst::Plugin::Session::State::Cookie';

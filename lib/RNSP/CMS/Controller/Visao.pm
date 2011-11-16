@@ -102,22 +102,31 @@ if(1){
 				result_class => 'DBIx::Class::ResultClass::HashRefInflator'
 			})->all;
 
+			
+
 			my @propostas_rows = $d->propostas->all;
 			my $propostas      = [];
 
 			foreach my $p (@propostas_rows){
+				my @boas_praticas = $p->boa_praticas->search(undef, {
+					result_class => 'DBIx::Class::ResultClass::HashRefInflator'
+				})->all;
+				my $boas_praticas = \@boas_praticas;
+
 				my $item = {
 					id             => $p->id,
 					titulo         => $p->id_documento->titulo,
 					texto          => $p->id_documento->texto,
 					id_documento   => $p->id_documento->id,
+					boas_praticas  => $boas_praticas,
+					tema           => $p->id_tema->nome,
+					regiao         => $p->id_regiao->nome,
 				};
 				push @$propostas,$item;
 				if (defined $id_proposta && $id_proposta == $p->id){
 					$c->stash ( proposta => $item );
 				}
 			}
-
 			my $indicadores = \@indicadors;
 
 			push @$diretrizes, {
@@ -126,7 +135,7 @@ if(1){
 				titulo        => $d->id_documento->titulo,
 				texto         => $d->id_documento->texto,
 				indicadores   => $indicadores,
-				propostas     => $propostas,
+				propostas     => $propostas
 			}
 		}
 		$c->cache->set('diretrizes-'.$id_visao, $diretrizes, '14min');

@@ -3,18 +3,24 @@
 		[%PROCESS diretriz.tt%]
 	</div>
 	<div class="span10">
+		<p><b>Tema: </b> [%proposta.tema%]</p>
+		<p><b>Região: </b> [%proposta.regiao%]</p>
+		<hr/>
 		[%PROCESS documento.tt%]
 
-		[%IF diretriz.indicadores %]
-			<hr/>
-			<h3 class="indicadores">Indicadores</h3>
 
+		
+		[%IF proposta.boas_praticas %]
+			<hr/>
+			<h3 class="indicadores">Boas Práticas</h3>
 			<ul>
-			[%FOREACH i = diretriz.indicadores %]
-				<li>[%i.descricao%]</li>
+			[%- USE HTML::BBCode( 'bbcode_limited' allowed_tags = [] stripscripts => 1 linebreaks = 1  ) -%]
+		[%FOREACH i = proposta.boas_praticas %]
+				<li>[% FILTER bbcode_limited %][%i.texto%][% END %]</li>
 			[%END%]
 			</ul>
 		[%END%]
+		
 	</div>
 	<div class="span3">
 		[%PROCESS proposta.tt%]
