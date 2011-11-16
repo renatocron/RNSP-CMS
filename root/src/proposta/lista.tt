@@ -1,0 +1,25 @@
+<table class="bordered-table zebra-striped condensed-table">
+<thead>
+	<tr>
+	<th>ID</th>
+	<th>Diretriz</th>
+	<th>Documento</th>
+	<th>Tema</th>
+	<th>Região</th>
+	<th>Opçãoes</th>
+	</tr>
+</thead>
+<tbody>
+	[%FOREACH d = propostas %]
+	<tr>
+		<td>[%d.id%]</td>
+		<td>[%d.id_diretriz.id_documento.titulo%]</td>
+		<td>[%d.id_documento.titulo%]</td>
+		<td>[%d.id_tema.nome%]</td>
+		<td>[%d.id_regiao.nome%]</td>
+		<td><a href="[%c.uri_for('/proposta',d.id, 'editar')%]">Editar</a></td>
+		</tr>
+	</tr>
+	[%END%]
+</tbody>
+</table>
