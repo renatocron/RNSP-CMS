@@ -44,13 +44,16 @@ sub editar: Chained('load') :  Args(0){
     $c->stash( titlep => 'Editar proposta', post => $c->req->params );
 
 	if (%{$c->req->params} && $c->stash->{proposta}) {
-		if (   $c->req->params->{diretriz } =~ /^\d+$/
-		    && $c->req->params->{documento} =~ /^\d+$/
+		if (   $c->req->params->{diretriz}  =~ /^\d+$/
+		    && $c->req->params->{documento_texto}
+			&& $c->req->params->{documento_titulo}
 			&& $c->req->params->{tema}      =~ /^\d+$/
 			&& $c->req->params->{regiao}    =~ /^\d+$/ ){
-			if (eval{$c->stash->{proposta}->update({
+			if (eval{$c->stash->{proposta}->id_documento->update({
+				titulo => $c->req->params->{documento_titulo},
+				texto  => $c->req->params->{documento_texto}
+			})} && eval{$c->stash->{proposta}->update({
 				id_diretriz  => $c->req->params->{diretriz},
-				id_documento => $c->req->params->{documento},
 				id_regiao    => $c->req->params->{regiao},
 				id_tema      => $c->req->params->{tema},
 			})}){
@@ -119,6 +122,63 @@ sub boa_pratica_delete: Chained('load'): Args(1){
 	}
 
 	$c->res->redirect($c->uri_for('/proposta', $c->stash->{proposta}->id, 'editar'));
+}
+
+sub nova: Chained('base') :  Args(0){
+	my ($self, $c) = @_;
+
+	$c->stash( titlep => 'Nova' );
+
+	my $model = $c->model('Db');
+
+	my @diretrizes = $model->resultset('Diretriz')->all;
+	$c->stash( diretrizes => \@diretrizes);
+
+	my @temas = $model->resultset('Tema')->all;
+	$c->stash( temas => \@temas);
+
+	my @regioes = $model->resultset('Regiao')->all;
+	$c->stash( regioes => \@regioes);
+
+
+	my $msg = $c->flash->{message};
+	$c->stash(message => $msg, error => $c->flash->{error}) if ($msg);
+}
+
+
+sub save: Chained('base') :  Args(0){
+	my ($self, $c) = @_;
+
+	if (   $c->req->params->{documento_texto}
+		&& $c->req->params->{documento_titulo}
+		&& $c->req->params->{diretriz}  =~ /^\d+$/
+		&& $c->req->params->{tema}      =~ /^\d+$/
+		&& $c->req->params->{regiao}    =~ /^\d+$/) {
+		my $doc_rs = $c->model('Db::Documento');
+		my ($doc, $di);
+		if ( $doc = eval{$doc_rs->create({
+				texto  => $c->req->params->{documento_texto},
+				titulo => $c->req->params->{documento_titulo}
+			})}
+			and $di = eval{$doc->propostas->create({
+				id_diretriz   => $c->req->params->{diretriz},
+				id_tema       => $c->req->params->{tema},
+				id_regiao     => $c->req->params->{regiao},
+			})} ){
+			$c->flash( message => 'Proposta adicionada com sucesso!' );
+			$c->cache->set("diretrizes-" . $_->id, undef, '0')
+					for ($c->model('DB::Diretriz')->all);
+
+			$c->res->redirect($c->uri_for('/proposta', $di->id, 'editar'));
+			return;
+		}else{
+			$c->flash( message => 'Erro ao atualizar proposta', error=>1 );
+		}
+	}else{
+		$c->flash( message => 'Erro no POST', error=>1 );
+	}
+
+	$c->res->redirect($c->uri_for('/proposta', 'nova'));
 }
 
 

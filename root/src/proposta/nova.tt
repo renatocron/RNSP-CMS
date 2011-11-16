@@ -1,0 +1,52 @@
+<form method="post" action="[%c.uri_for('/proposta', 'save')%]">
+<fieldset>
+	<legend>Proposta</legend>
+	<div class="clearfix">
+		<label>Título</label>
+		<div class="input">
+			<input name="documento_titulo" class="span10" required value="[%di.id_documento.titulo%]" />
+		</div>
+	</div>
+	<div class="clearfix">
+		<label>Texto</label>
+		<div class="input">
+			<textarea name="documento_texto" style="height: 20em;" class="span10" required>[%di.id_documento.texto%]</textarea>
+		</div>
+	</div>
+
+	<div class="clearfix">
+		<label>Tema</label>
+		<div class="input">
+			<select name="tema" class="span10" required>
+				[%FOREACH r = temas%]
+					<option value="[%r.id%]" [%IF proposta.id_tema.id == r.id%]selected="selected"[%END%] >[%r.nome%]</option>
+				[%END%]
+			</select>
+		</div>
+	</div>
+	<div class="clearfix">
+		<label>Região</label>
+		<div class="input">
+			<select name="regiao" class="span10" required>
+				[%FOREACH r = regioes%]
+					<option value="[%r.id%]" [%IF proposta.id_regiao.id == r.id%]selected="selected"[%END%] >[%r.nome%]</option>
+				[%END%]
+			</select>
+		</div>
+	</div>
+
+	<div class="clearfix">
+		<label>Diretriz</label>
+		<div class="input">
+			<select name="diretriz" class="span10" required>
+				[%FOREACH v = diretrizes%]
+					<option value="[%v.id%]">[%v.id_documento.titulo%]</option>
+				[%END%]
+			</select>
+		</div>
+	</div>
+</fieldset>
+<div class="actions">
+	<button type="submit" class="btn primary">Adicionar proposta</button>
+</div>
+</form>

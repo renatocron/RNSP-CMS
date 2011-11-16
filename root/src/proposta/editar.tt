@@ -2,13 +2,15 @@
 <fieldset>
 	<legend>Proposta</legend>
 	<div class="clearfix">
-		<label>Documento</label>
+		<label>Título</label>
 		<div class="input">
-			<select name="documento" class="span10" required>
-				[%FOREACH d = docs%]
-					<option value="[%d.id%]" [%IF proposta.id_documento.id == d.id%]selected="selected"[%END%] >[%d.titulo%]</option>
-				[%END%]
-			</select>
+			<input name="documento_titulo" class="span10" required value="[%proposta.id_documento.titulo%]" />
+		</div>
+	</div>
+	<div class="clearfix">
+		<label>Texto</label>
+		<div class="input">
+			<textarea name="documento_texto" style="height: 20em;" class="span10" required>[%proposta.id_documento.texto%]</textarea>
 		</div>
 	</div>
 	<div class="clearfix">
