@@ -26,7 +26,7 @@
 		<div class="input">
 			<select name="tema" class="span10" required>
 				[%FOREACH r = temas%]
-					<option value="[%di.id%]" [%IF proposta.id_tema.id == r.id%]selected="selected"[%END%] >[%r.nome%]</option>
+					<option value="[%r.id%]" [%IF proposta.id_tema.id == r.id%]selected="selected"[%END%] >[%r.nome%]</option>
 				[%END%]
 			</select>
 		</div>
@@ -47,5 +47,40 @@
 	
 	<a href="[%c.uri_for('/diretriz', proposta.id_diretriz.id, 'proposta_delete', proposta.id)%]" class="btn error" onclick="javascript:return window.confirm('Deseja mesmo apagar?')" style="float: right" >remover</a>
 
+</div>
+</form>
+<hr/>
+<h2>Boas práticas</h2>
+<table class="bordered-table zebra-striped condensed-table">
+<thead>
+	<tr>
+		<th>ID</th>
+		<th>Texto</th>
+		<th>Opções</th>
+	</tr>
+</thead>
+<tbody>
+	[%FOREACH bp = proposta.boa_praticas%]
+		<tr>
+		<td>[% bp.id %]</td>
+		<td>[% bp.texto %]</td>
+		<td><a href="[%c.uri_for('/proposta', proposta.id, 'boa_pratica_delete', bp.id)%]">Remover</a></td>
+	</tr>
+	[%END%]
+</tbody>
+</table>
+
+<form method="post" action="[%c.uri_for('/proposta', proposta.id, 'boa_pratica_save')%]">
+<fieldset>
+	<legend>Adicionar boa prática</legend>
+	<div class="clearfix">
+		<label>Texto</label>
+		<div class="input">
+			<textarea style="height: 5em" class="span10" required name="texto">[% post.descricao OR doc.descricao %]</textarea>
+		</div>
+	</div>
+</fieldset>
+<div class="actions">
+	<button type="submit" class="btn primary">Adicionar</button>
 </div>
 </form>
