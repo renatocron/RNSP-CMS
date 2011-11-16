@@ -29,6 +29,12 @@ requires 'Catalyst::Plugin::Session::Store::Cache';
 requires 'Catalyst::Plugin::Session::PerUser';
 requires 'Catalyst::Plugin::Params::Nested';
 
+requires 'Template::AutoFilter';
+requires 'MooseX::MarkAsMethods';
+requires 'DBIx::Class::TimeStamp';
+requires 'HTML::BBCode';
+requires 'Template::Plugin::HTML::BBCode';
+
 requires 'Catalyst::Authentication::Credential::Password';
 
 catalyst;

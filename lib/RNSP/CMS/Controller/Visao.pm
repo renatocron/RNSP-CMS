@@ -119,8 +119,7 @@ if(1){
 			}
 
 			my $indicadores = \@indicadors;
-use DDP;
-p$indicadores;
+
 			push @$diretrizes, {
 				id_documento  => $d->id_documento->id,
 				id            => $d->id,

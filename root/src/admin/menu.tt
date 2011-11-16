@@ -32,6 +32,12 @@
 			</ul>
 		</li>
 
+		<li class="dropdown" data-dropdown=1>
+			<a href="#" class="dropdown-toggle">Propostas</a>
+			<ul class="dropdown-menu[%APPENDCLASS%]" >
+				<li><a href="[%c.uri_for('/proposta/lista')%]">Lista</a></li>
+			</ul>
+		</li>
 </ul>
 
  [%ELSE%]

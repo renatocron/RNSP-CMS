@@ -121,3 +121,12 @@ insert into regiao (nome) values ('regiao 1');
 
 insert into documento(titulo, texto) values ('doc primeira proposta', 'rand() <script>alert("i cant")</script>');
 insert into proposta(id_tema, id_regiao, id_diretriz, id_documento) values(1,1,1,9);
+
+
+
+create table boa_pratica (
+	id INTEGER primary key,
+	id_proposta int not null,
+	texto varchar not null,
+	FOREIGN KEY (id_proposta) REFERENCES proposta(id)
+);

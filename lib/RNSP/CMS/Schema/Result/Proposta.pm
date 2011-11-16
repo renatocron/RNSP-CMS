@@ -99,6 +99,21 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
+=head2 boa_praticas
+
+Type: has_many
+
+Related object: L<RNSP::CMS::Schema::Result::BoaPratica>
+
+=cut
+
+__PACKAGE__->has_many(
+  "boa_praticas",
+  "RNSP::CMS::Schema::Result::BoaPratica",
+  { "foreign.id_proposta" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 id_diretriz
 
 Type: belongs_to
@@ -160,8 +175,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-13 14:23:49
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1p+pNRjUV0DNM1DzC+wA9w
+# Created by DBIx::Class::Schema::Loader v0.07012 @ 2011-11-15 21:15:01
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vd7uEFew8HDryZdt7t8iSQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -85,7 +85,9 @@ sub editar: Chained('load') :  Args(0){
 				nome => $c->req->params->{nome}
 			})){
 				$c->stash( message => 'Alteração feita com sucesso!!' );
-				$c->cache->set("tema-" . $c->stash->{tema}->id, undef, '0');
+
+				$c->cache->set("diretrizes-" . $_->id, undef, '0')
+					for ($c->model('DB::Diretriz')->all);
 			}else{
 				$c->stash( message => 'Erro durante alteração', error => 1 );
 			}
