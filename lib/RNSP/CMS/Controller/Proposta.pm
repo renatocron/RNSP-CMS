@@ -60,7 +60,7 @@ sub editar: Chained('load') :  Args(0){
 				$c->stash( message => 'Alteração feita com sucesso!!' );
 				# segue sempre limpando o cache =/
 				$c->cache->set("diretrizes-" . $_->id, undef, '0')
-					for ($c->model('DB::Diretriz')->all);
+					for ($c->model('DB::Visao')->all);
 			}else{
 				$c->stash( message => 'Erro durante alteração', error => 1 );
 			}
@@ -82,6 +82,9 @@ sub editar: Chained('load') :  Args(0){
 	my @regioes = $model->resultset('Regiao')->all;
 	$c->stash( regioes => \@regioes);
 
+	my @visoes = $model->resultset('Visao')->all;
+	$c->stash( visoes => \@visoes);
+
 
 	my $msg = $c->flash->{message};
 	$c->stash(message => $msg) if ($msg);
@@ -100,7 +103,7 @@ sub boa_pratica_save: Chained('load'):  Args(0){
 			}) ){
 			$c->flash( message => 'Boa prática criado com sucesso!' );
 			$c->cache->set("diretrizes-" . $_->id, undef, '0')
-					for ($c->model('DB::Diretriz')->all);
+					for ($c->model('DB::Visao')->all);
 		}else{
 			$c->flash( message => 'Erro ao criar boa prática', error=>1 );
 		}
@@ -118,7 +121,7 @@ sub boa_pratica_delete: Chained('load'): Args(1){
 	if(eval{$model->resultset('BoaPratica')->find($id)->delete}){
 		$c->flash( message => 'Boa prática removida!' );
 		$c->cache->set("diretrizes-" . $_->id, undef, '0')
-					for ($c->model('DB::Diretriz')->all);
+					for ($c->model('DB::Visao')->all);
 	}
 
 	$c->res->redirect($c->uri_for('/proposta', $c->stash->{proposta}->id, 'editar'));
@@ -131,15 +134,14 @@ sub nova: Chained('base') :  Args(0){
 
 	my $model = $c->model('Db');
 
-	my @diretrizes = $model->resultset('Diretriz')->all;
-	$c->stash( diretrizes => \@diretrizes);
-
 	my @temas = $model->resultset('Tema')->all;
 	$c->stash( temas => \@temas);
 
 	my @regioes = $model->resultset('Regiao')->all;
 	$c->stash( regioes => \@regioes);
 
+	my @visoes = $model->resultset('Visao')->all;
+	$c->stash( visoes => \@visoes);
 
 	my $msg = $c->flash->{message};
 	$c->stash(message => $msg, error => $c->flash->{error}) if ($msg);
@@ -167,7 +169,7 @@ sub save: Chained('base') :  Args(0){
 			})} ){
 			$c->flash( message => 'Proposta adicionada com sucesso!' );
 			$c->cache->set("diretrizes-" . $_->id, undef, '0')
-					for ($c->model('DB::Diretriz')->all);
+					for ($c->model('DB::Visao')->all);
 
 			$c->res->redirect($c->uri_for('/proposta', $di->id, 'editar'));
 			return;

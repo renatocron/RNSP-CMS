@@ -164,15 +164,21 @@ sub indicador_save: Chained('load'):  Args(0){
 sub proposta_save: Chained('load'):  Args(0){
 	my ($self, $c) = @_;
 
-	if (   $c->req->params->{documento} =~ /^\d+$/
-		&& $c->req->params->{regiao}    =~ /^\d+$/
-		&& $c->req->params->{tema}      =~ /^\d+$/) {
-
-		if ( eval{$c->stash->{di}->propostas->create({
-				id_tema      => $c->req->params->{tema},
-				id_regiao    => $c->req->params->{regiao},
-				id_documento => $c->req->params->{documento},
-			}) }){
+	if (   $c->req->params->{documento_texto}
+		&& $c->req->params->{documento_titulo}
+		&& $c->req->params->{tema}      =~ /^\d+$/
+		&& $c->req->params->{regiao}    =~ /^\d+$/) {
+		my $doc_rs = $c->model('Db::Documento');
+		my ($doc, $di);
+		if ( $doc = eval{$doc_rs->create({
+				texto  => $c->req->params->{documento_texto},
+				titulo => $c->req->params->{documento_titulo}
+			})}
+			and $di = eval{$doc->propostas->create({
+				id_diretriz   => $c->stash->{di}->id,
+				id_tema       => $c->req->params->{tema},
+				id_regiao     => $c->req->params->{regiao},
+			})} ){
 			$c->flash( message => 'Proposta criada com sucesso!' );
 			$c->cache->set('diretrizes-'.$c->req->params->{visao}, undef, '0min');
 

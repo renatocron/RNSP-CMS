@@ -39,8 +39,12 @@
 		<label>Diretriz</label>
 		<div class="input">
 			<select name="diretriz" class="span10" required>
-				[%FOREACH v = diretrizes%]
-					<option value="[%v.id%]">[%v.id_documento.titulo%]</option>
+				[%FOREACH v = visoes%]
+				<optgroup label="[%v.texto_menu%]">
+					[%FOREACH di = v.diretrizzes%]
+						<option value="[%di.id%]">[%di.id_documento.titulo%]</option>
+					[%END%]
+				</optgroup>
 				[%END%]
 			</select>
 		</div>

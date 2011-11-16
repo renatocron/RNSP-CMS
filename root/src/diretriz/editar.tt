@@ -88,7 +88,8 @@
 		<td>[% p.id_documento.titulo %]</td>
 		<td>[% p.id_tema.nome %]</td>
 		<td>[% p.id_regiao.nome %]</td>
-		<td><a href="[%c.uri_for('/diretriz', di.id, 'proposta_delete', p.id)%]">Remover</a></td>
+		<td><a href="[%c.uri_for('/proposta', p.id, 'editar')%]">Editar</a>
+			<a href="[%c.uri_for('/diretriz', di.id, 'proposta_delete', p.id)%]">Remover</a></td>
 	</tr>
 	[%END%]
 </tbody>
@@ -98,15 +99,18 @@
 <fieldset>
 	<legend>Nova proposta</legend>
 	<div class="clearfix">
-		<label>Documento</label>
+		<label>Título</label>
 		<div class="input">
-			<select name="documento" class="span10" required>
-				[%FOREACH d = docs%]
-					<option value="[%d.id%]">[%d.titulo%]</option>
-				[%END%]
-			</select>
+			<input name="documento_titulo" class="span10" required/>
 		</div>
 	</div>
+	<div class="clearfix">
+		<label>Texto</label>
+		<div class="input">
+			<textarea name="documento_texto" style="height: 20em;" class="span10" required></textarea>
+		</div>
+	</div>
+
 	<div class="clearfix">
 		<label>Região</label>
 		<div class="input">

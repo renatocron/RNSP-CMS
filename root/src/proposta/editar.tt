@@ -17,12 +17,17 @@
 		<label>Diretriz</label>
 		<div class="input">
 			<select name="diretriz" class="span10" required>
-				[%FOREACH di = diretrizes%]
-					<option value="[%di.id%]" [%IF proposta.id_diretriz.id == di.id%]selected="selected"[%END%] >[%di.id_documento.titulo%]</option>
+				[%FOREACH v = visoes%]
+				<optgroup label="[%v.texto_menu%]">
+					[%FOREACH di = v.diretrizzes%]
+						<option value="[%di.id%]" [%IF proposta.id_diretriz.id == di.id%]selected="selected"[%END%] >[%di.id_documento.titulo%]</option>
+					[%END%]
+				</optgroup>
 				[%END%]
 			</select>
 		</div>
 	</div>
+
 	<div class="clearfix">
 		<label>Tema</label>
 		<div class="input">
