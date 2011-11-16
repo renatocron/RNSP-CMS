@@ -23,6 +23,12 @@ Catalyst Controller.
 
 sub base : Chained('/base') PathPart('sp2022') CaptureArgs(0) {}
 
+sub visao : Chained('/base') PathPart('visao') CaptureArgs(0) {
+	my ( $self, $c ) = @_;
+
+	$c->stash( admin => 1, title => 'Visões' );
+}
+
 
 sub sp2022 :Chained('base') PathPart('') Args(1) {
     my ( $self, $c, $texto_uri ) = @_;
@@ -164,6 +170,61 @@ sub stash_diretrizes : Private {
 }
 
 
+
+sub lista: Chained('visao') : PathPart('lista') Args(0){
+	my ($self, $c) = @_;
+    $c->stash( titlep => 'Lista' );
+
+	my $model = $c->model('Db');
+	my @visoes = $model->resultset('Visao')->all;
+
+	$c->stash( visoes => \@visoes );
+
+	my $msg = $c->flash->{message};
+	$c->stash(message => $msg, error => $c->flash->{error}) if ($msg);
+}
+
+sub load : Chained('visao') PathPart('') CaptureArgs(1){
+	my ($self, $c, $id) = @_;
+
+	my $model = $c->model('Db');
+
+	my $doc = $model->resultset('Visao')->find($id);
+	$c->stash( visao => $doc);
+
+}
+
+
+sub editar: Chained('load') : PathPart('editar') Args(0){
+	my ($self, $c) = @_;
+    $c->stash( titlep => 'Editar' );
+
+	my $msg = $c->flash->{message};
+	$c->stash(message => $msg, error => $c->flash->{error}) if ($msg);
+}
+
+
+sub editar_save: Chained('load') :  Args(0){
+	my ($self, $c) = @_;
+
+	if (   $c->req->params->{documento_texto}
+		&& $c->req->params->{documento_titulo}
+		) {
+		if ( eval{$c->stash->{visao}->id_documento->update({
+				texto  => $c->req->params->{documento_texto},
+				titulo => $c->req->params->{documento_titulo}
+			})} ){
+			$c->flash( message => 'Visão alterada com sucesso!' );
+			$c->cache->set('documento-'.$c->stash->{visao}->id_documento->id, undef, '0min');
+
+		}else{
+			$c->flash( message => 'Erro ao atualizar visão', error=>1 );
+		}
+	}else{
+		$c->flash( message => 'Erro no POST', error=>1 );
+	}
+	$c->res->redirect($c->uri_for($c->stash->{visao}->id, 'editar'));
+}
 
 =head1 AUTHOR
 

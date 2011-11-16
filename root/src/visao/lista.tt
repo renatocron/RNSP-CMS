@@ -1,0 +1,25 @@
+<div class="row">
+<div class="span16">
+<table class="bordered-table zebra-striped condensed-table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Visão</th>
+			<th>Título</th>
+			<th>Opções</th>
+		</tr>
+	</thead>
+	<tbody>
+	[%FOREACH v = visoes s%]
+		<tr>
+			<td>[%v.id%]</td>
+			<td>[%v.texto_menu%]</td>
+			<td>[%v.id_documento.titulo%]</td>
+			<td><a href="[%c.uri_for(v.id, 'editar')%]">Editar</a></td>
+		</tr>
+	[%END%]
+	</tbody>
+</table>
+
+</div>
+</div>

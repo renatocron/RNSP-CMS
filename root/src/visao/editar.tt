@@ -1,0 +1,20 @@
+<form method="post" action="[%c.uri_for(visao.id, 'editar_save')%]">
+<fieldset>
+	<legend>Visão</legend>
+	<div class="clearfix">
+		<label>Título</label>
+		<div class="input">
+			<input name="documento_titulo" class="span10" required value="[%visao.id_documento.titulo%]" />
+		</div>
+	</div>
+	<div class="clearfix">
+		<label>Texto</label>
+		<div class="input">
+			<textarea name="documento_texto" style="height: 20em;" class="span10" required>[%visao.id_documento.texto%]</textarea>
+		</div>
+	</div>
+</fieldset>
+<div class="actions">
+	<button type="submit" class="btn primary">Salvar mudanças</button>
+</div>
+</form>
