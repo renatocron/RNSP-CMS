@@ -20,7 +20,6 @@
 <tr><td>[color=blue]blue[/color]</td><td><span style="color:blue">blue</span></td></tr>
 <tr><td>[color=#FF00FF]#f0f[/color]</td><td><span style="color:#FF00FF">#f0f</span></td></tr>
 <tr><td>[size=30]tamanho 30[/size]</td><td><span style="font-size:30px">tamanho 30</span></td></tr>
-<tr><td>[size=50]tamanho 50[/size]</td><td><span style="font-size:50px">tamanho 50</span></td></tr>
 <tr><td>[quote]Citação[/quote]</td><td><div class="bbcode_quote_header">Quote:</div><div class="bbcode_quote_body">Citação</div></td></tr>
 <tr><td>
 [list][*]Lista1
@@ -40,7 +39,58 @@
 </td></tr>
 <tr><td>[email]seu@mail.com[/email]</td><td><a href="mailto:seu@mail.com">seu@mail.com</a></td></tr>
 
+
+<tr><td>[color=red]muito[b]destaque[/b] [size=33]:)[/size][/color]</td><td><span style="color:red">muito <span style="font-weight:bold">destaque</span>   <span style="font-size:33px">:)</span></span></td></tr>
+
+
 </tbody>
 
 </table>
 
+<h2>Tabela de cores</h2>
+<table border="0" cellpadding="5" cellspacing="0" cols="4" width="600">
+  <tbody>
+    <tr align="center">
+      <td bgcolor="#ffffff"><font color="#000000" size="-1">"#FFFFFF"</font></td>
+      <td bgcolor="#ffcccc"><font color="#000000" size="-1">"#FFCCCC"</font></td>
+      <td bgcolor="#ffcc99"><font color="#000000" size="-1">"#FFCC99"</font></td>
+      <td bgcolor="#ffffcc"><font color="#000000" size="-1">"#FFFFCC"</font></td>
+    </tr>
+    <tr align="center">
+      <td bgcolor="#cccccc"><font color="#000000" size="-1">"#CCCCCC"</font></td>
+      <td bgcolor="#ff6666"><font color="#000000" size="-1">"#FF6666"</font></td>
+      <td bgcolor="#ffcc33"><font color="#000000" size="-1">"#FFCC33"</font></td>
+      <td bgcolor="#ffff99"><font color="#000000" size="-1">"#FFFF99"</font></td>
+    </tr>
+    <tr align="center">
+      <td bgcolor="#c0c0c0"><font color="#000000" size="-1">"#C0C0C0"</font></td>
+      <td bgcolor="#ff0000"><font color="#000000" size="-1">"#FF0000"</font></td>
+      <td bgcolor="#ff9900"><font color="#000000" size="-1">"#FF9900"</font></td>
+      <td bgcolor="#ffff00"><font color="#000000" size="-1">"#FFFF00"</font></td>
+    </tr>
+    <tr align="center">
+      <td bgcolor="#999999">"#999999"</td>
+      <td bgcolor="#cc0000">"#CC0000"</td>
+      <td bgcolor="#ff6600"><font color="#000000" size="-1">"#FF6600"</font></td>
+      <td bgcolor="#ffcc00"><font color="#000000" size="-1">"#FFCC00"</font></td>
+    </tr>
+    <tr align="center">
+      <td bgcolor="#666666">"#666666"</td>
+      <td bgcolor="#990000">"#990000"</td>
+      <td bgcolor="#cc6600">"#CC6600"</td>
+      <td bgcolor="#999900">"#999900"</td>
+    </tr>
+    <tr align="center">
+      <td bgcolor="#333333">"#333333"</td>
+      <td bgcolor="#660000">"#660000"</td>
+      <td bgcolor="#993300">"#993300"</td>
+      <td bgcolor="#666600">"#666600"</td>
+    </tr>
+    <tr align="center">
+      <td bgcolor="#000000">"#000000"</td>
+      <td bgcolor="#330000">"#330000"</td>
+      <td bgcolor="#663300">"#663300"</td>
+      <td bgcolor="#333300">"#333300"</td>
+    </tr>
+  </tbody>
+</table>
