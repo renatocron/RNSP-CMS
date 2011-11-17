@@ -1,0 +1,46 @@
+<h2>Entendendo BBCode</h2>
+
+
+<table class="bordered-table zebra-striped condensed-table">
+<thead>
+	<tr>
+		<th>BBCode</th>
+		<th>Resultado</th>
+	</tr>
+</thead>
+<tbody>
+
+<tr><td>[url="http://seu.site.com"]descrição do link[/url]</td><td> <a href="http://seu.site.com"> descrição do link</a></td></tr>
+<tr><td>[img]http://mail.google.com/mail/u/0/images/2/5/logo4.png[/img]</td><td><img src="http://mail.google.com/mail/u/0/images/2/5/logo4.png" /></td></tr>
+<tr><td>[b]texto em negrito[/b]</td><td><b>texto em negrito</b></td></tr>
+<tr><td>[i]texto em italico[/i]</td><td><i>texto em italico</i></td></tr>
+<tr><td>[u]texto sublinhado[/u]</td><td><u>texto sublinhado</u></td></tr>
+<tr><td>[code]código[/code]</td><td><code>código</code></td></tr>
+<tr><td>[color=red]red[/color]</td><td><span style="color:red">red</span></td></tr>
+<tr><td>[color=blue]blue[/color]</td><td><span style="color:blue">blue</span></td></tr>
+<tr><td>[color=#FF00FF]#f0f[/color]</td><td><span style="color:#FF00FF">#f0f</span></td></tr>
+<tr><td>[size=30]tamanho 30[/size]</td><td><span style="font-size:30px">tamanho 30</span></td></tr>
+<tr><td>[size=50]tamanho 50[/size]</td><td><span style="font-size:50px">tamanho 50</span></td></tr>
+<tr><td>[quote]Citação[/quote]</td><td><div class="bbcode_quote_header">Quote:</div><div class="bbcode_quote_body">Citação</div></td></tr>
+<tr><td>
+[list][*]Lista1
+[*]Lista2[*]Lista3[/list]</td><td>
+<ul><li>Lista1</li>
+<li>Lista2</li>
+<li>Lista3</li>
+</ul>
+</td></tr>
+<tr><td>
+[list=A][*]Lista A
+[*]Lista B[*]Lista C[/list]</td><td>
+<ol style="list-style-type:lower-alpha"><li>Lista A</li>
+<li>Lista B</li>
+<li>Lista C</li>
+</ol>
+</td></tr>
+<tr><td>[email]seu@mail.com[/email]</td><td><a href="mailto:seu@mail.com">seu@mail.com</a></td></tr>
+
+</tbody>
+
+</table>
+

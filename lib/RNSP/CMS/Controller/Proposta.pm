@@ -96,10 +96,12 @@ sub boa_pratica_save: Chained('load'):  Args(0){
 	my ($self, $c) = @_;
 
 	if (   $c->req->params->{texto}
-		&& $c->stash->{proposta}) {
+		&& $c->stash->{proposta}
+		&& $c->req->params->{titulo}) {
 
 		if ( $c->stash->{proposta}->boa_praticas->create({
-				texto => $c->req->params->{texto}
+				texto  => $c->req->params->{texto},
+				titulo => $c->req->params->{titulo}
 			}) ){
 			$c->flash( message => 'Boa prática criado com sucesso!' );
 			$c->cache->set("diretrizes-" . $_->id, undef, '0')

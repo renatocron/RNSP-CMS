@@ -41,7 +41,7 @@ sub documento :Private {
 
 sub base : Chained('/base') PathPart('documento') CaptureArgs(0) {
 	my ($self, $c) = @_;
-    $c->stash( admin => 1, title => 'Documentos' );
+    $c->stash( admin => 1, title => 'Páginas' );
 
 	
 	if (!$c->user_exists) {

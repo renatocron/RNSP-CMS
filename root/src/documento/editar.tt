@@ -1,6 +1,6 @@
 <form method="post">
 <fieldset>
-	<legend>Documento</legend>
+	<legend>Página</legend>
 	<div class="clearfix">
 		<label>Título</label>
 		<div class="input">

@@ -62,6 +62,7 @@
 <thead>
 	<tr>
 		<th>ID</th>
+		<th>Título</th>
 		<th>Texto</th>
 		<th>Opções</th>
 	</tr>
@@ -70,6 +71,7 @@
 	[%FOREACH bp = proposta.boa_praticas%]
 		<tr>
 		<td>[% bp.id %]</td>
+		<td>[% bp.titulo %]</td>
 		<td>[% bp.texto %]</td>
 		<td><a href="[%c.uri_for('/proposta', proposta.id, 'boa_pratica_delete', bp.id)%]">Remover</a></td>
 	</tr>
@@ -80,6 +82,12 @@
 <form method="post" action="[%c.uri_for('/proposta', proposta.id, 'boa_pratica_save')%]">
 <fieldset>
 	<legend>Adicionar boa prática</legend>
+	<div class="clearfix">
+		<label>Título</label>
+		<div class="input">
+			<input class="span10" required name="titulo" />
+		</div>
+	</div>
 	<div class="clearfix">
 		<label>Texto</label>
 		<div class="input">

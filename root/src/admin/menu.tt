@@ -9,6 +9,12 @@
 			</ul>
 		</li>
 -->
+		<li class="menu">
+
+			<li><a href="[%c.uri_for('/documento/1/editar')%]">Página inícial</a></li>
+			
+		</li>
+
 		<li class="dropdown" data-dropdown=1>
 			<a href="#" class="dropdown-toggle">Visões</a>
 			<ul class="dropdown-menu[%APPENDCLASS%]" >
@@ -48,6 +54,11 @@
 			</ul>
 		</li>
 
+		<li class="menu">
+
+			<li><a href="[%c.uri_for('/bbcode')%]">Dicas</a></li>
+
+		</li>
 
 </ul>
 

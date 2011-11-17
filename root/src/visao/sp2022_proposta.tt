@@ -14,9 +14,9 @@
 			<hr/>
 			<h3 class="indicadores">Boas Práticas</h3>
 			<ul>
-			[%- USE HTML::BBCode( 'bbcode_limited' allowed_tags = [] stripscripts => 1 linebreaks = 1  ) -%]
-		[%FOREACH i = proposta.boas_praticas %]
-				<li>[% FILTER bbcode_limited %][%i.texto%][% END %]</li>
+			[%- USE HTML::BBCode( 'bbcode_unlimited' stripscripts => 1 linebreaks = 1  ) -%]
+			[%FOREACH i = proposta.boas_praticas %]
+				<li><b>[%i.titulo%]</b><p> [% FILTER bbcode_unlimited %][%i.texto%][% END %]</p></li>
 			[%END%]
 			</ul>
 		[%END%]

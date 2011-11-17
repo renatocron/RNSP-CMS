@@ -1,10 +1,9 @@
 <div class="documento">
 	<h1>[% documento.titulo %]</h1>
-	<span>[%documento.created_at%]</span>
-	[%- USE HTML::BBCode( 'bbcode_limited' allowed_tags = [] stripscripts => 1 linebreaks = 1  ) -%]
+	<span class="date">[%documento.created_at%]</span>
+	[%- USE HTML::BBCode( 'bbcode_unlimited' stripscripts => 1 linebreaks = 1  ) -%]
 	<p>
-	[% FILTER bbcode_limited %][%documento.texto%][% END %]
+	[% FILTER bbcode_unlimited %][%documento.texto%][% END %]
 	</p>
-
 </div>
 
