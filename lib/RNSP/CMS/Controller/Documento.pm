@@ -30,9 +30,10 @@ sub documento :Private {
 
 		$documento = {
 			titulo => $documento_rs->titulo,
-			texto  => $documento_rs->texto,
+			texto  => $documento_rs->texto_br,
 			created_at => $documento_rs->created_at
 		};
+
 		$c->cache->set("documento-$id_documento", $documento, '14 min');
 	}
 

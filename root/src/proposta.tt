@@ -1,4 +1,4 @@
-<h3>Propostas para essa diretriz</h3>
+<h3 class="subtitulo">Propostas para essa diretriz</h3>
 <div class="propostas">
 [%FOREACH p = diretriz.propostas%]
 <div class="botao_menu visao-[%visao.id%] [%IF p.id == proposta.id %]active[%END%]"><a href="[%c.uri_for('/sp2022',visao.texto_uri, diretriz.id, p.id)%]">[%p.titulo%]</a></div>

@@ -34,7 +34,9 @@ requires 'Template::AutoFilter';
 requires 'MooseX::MarkAsMethods';
 requires 'DBIx::Class::TimeStamp';
 requires 'HTML::BBCode';
+
 requires 'Template::Plugin::HTML::BBCode';
+requires 'Template::Plugin::Filter::HTMLScrubber';
 
 requires 'Catalyst::Authentication::Credential::Password';
 requires 'Catalyst::Restarter';

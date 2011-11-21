@@ -150,6 +150,15 @@ sub inicio_texto {
 	return join(' ', @items[0..8] ) . '...';
 }
 
+sub texto_br {
+	my $self = shift();
+
+	my $html = $self->texto;
+	$html =~  s/\n/<br \/>/ig;
+	return $html;
+}
+
+
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
 1;

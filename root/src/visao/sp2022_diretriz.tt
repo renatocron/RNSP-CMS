@@ -9,7 +9,7 @@
 			<hr/>
 			<h3 class="indicadores">Indicadores</h3>
 
-			<ul>
+			<ul class="indicadores">
 			[%FOREACH i = diretriz.indicadores %]
 				<li><p>[%i.descricao%]</p><p><b>META: </b>[%i.meta%]<p></li>
 			[%END%]

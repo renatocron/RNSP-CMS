@@ -3,20 +3,15 @@
 		[%PROCESS diretriz.tt%]
 	</div>
 	<div class="span10">
-		<p><b>Tema: </b> [%proposta.tema%]</p>
-		<p><b>Região: </b> [%proposta.regiao%]</p>
-		<hr/>
+
 		[%PROCESS documento.tt%]
 
-
-		
 		[%IF proposta.boas_praticas %]
 			<hr/>
 			<h3 class="indicadores">Boas Práticas</h3>
 			<ul>
-			[%- USE HTML::BBCode( 'bbcode_unlimited' stripscripts => 1 linebreaks = 1  ) -%]
 			[%FOREACH i = proposta.boas_praticas %]
-				<li><b>[%i.titulo%]</b><p> [% FILTER bbcode_unlimited %][%i.texto%][% END %]</p></li>
+				<li><b>[%i.titulo%]</b><p>  [%i.texto%] </p></li>
 			[%END%]
 			</ul>
 		[%END%]

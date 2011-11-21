@@ -17,9 +17,7 @@
 	margin-right: 2px;
 	background-color: white;
 	float: left;
-	border-radius: 10px;
-
-	text-transform: uppercase;
+	border-radius: 10px; 
 	
 	color: #DDD;	
 	text-shadow: 0 0 2px #222;
@@ -31,20 +29,36 @@
 .visao-5, .menu-5 {background-color: #E98537;}
 .botao_menu a {width: 140px; display: block;padding: 10px}
 .botao_menu a, .botao_menu a:hover, .botao_menu a:visited {
+	font-weight: bold;
+	font-size: 1em;
 	text-decoration: none;
-	color: #DDD;
+	color: #FFF;
 }
+body {
+	font-family: Verdana,'Times New Roman',sans-serif,serif;
+}
+.subtitulo {
+	color: #888;
+	height: 60px;
+	line-height: 1.4em;
+}
+
 .propostas .botao_menu , .diretrizes .botao_menu {
 	width: 138px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
-.propostas .botao_menu a, .diretrizes .botao_menu a {width: 115px;}
+.propostas .botao_menu a, .diretrizes .botao_menu a {
+	width: 115px;
+	font-size: 0.9em;
+	color: #000;
+	text-shadow: 0 0 2px #666;	
+}
  
 .visao-1.active {background-color: #82a8cc;}
-.visao-2.active {background-color: green;}
-.visao-3.active {background-color: red;}
-.visao-4.active {background-color: #A00;}
-.visao-5.active {background-color: orange;}
+.visao-2.active {background-color: #80C477;}
+.visao-3.active {background-color: #FF546D}
+.visao-4.active {background-color: #9A8ADF;}
+.visao-5.active {background-color: #EFA539;}
 
 footer {
 	margin-top: 0;
@@ -57,9 +71,13 @@ footer {
 
 div.documento {margin-right: 20px}
 div.documento h1 {
+	font-size: 22px;
 	text-align: center;
 }
 div.documento p {
+	text-align: center;
+	font-size: 14px;
+	line-height: 16px;
 	text-align: justify;
 }
 div.documento span.date {
@@ -70,7 +88,17 @@ div.documento span.date {
 
 div.menu_visoes {
 	margin-top: 20px;
-	margin-bottom: 20px;	
+	margin-bottom: 40px;
+}
+div.active-1 .menu-1,
+div.active-2 .menu-2,
+div.active-3 .menu-3,
+div.active-4 .menu-4,
+div.active-5 .menu-5 	{
+	border-bottom: 7px solid #888;
+}
+div.menu_visoes div.botao_menu {
+	text-transform: uppercase;
 }
 /* culpe o desgracado do bootstrap por ligar o transition em tudo! */
 .btn,input,textarea{
@@ -81,3 +109,7 @@ div.menu_visoes {
 	transition:0.1s linear background-position;
 }
 select { background-color: white }
+h3.indicadores,ul.indicadores li b {color: #666;}
+ul.indicadores li {margin-bottom: 2em;}
+
+ul.indicadores li {color: #000;}

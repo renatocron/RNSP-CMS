@@ -44,7 +44,9 @@
 		<div class="page-header">
 			<img src="[%c.uri_for('/static/images/topo.png')%]"  alt="São Paulo 2022" height="258" width="940" /> <!-- TODO redimencionar a imagem para 940px / remover search box da imagem ? vai exitir search? -->
 		</div>
-		[% PROCESS 'visoes.tt' %]
+		<div class="active-[%visao.id%]">
+			[% PROCESS 'visoes.tt' %]
+		</div>
 		[% content | none %]
 	</div>
 </div>
